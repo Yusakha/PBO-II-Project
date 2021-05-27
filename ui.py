@@ -29,6 +29,8 @@ class fitur_login ( wx.Frame ):
 		bSizer8 = wx.BoxSizer( wx.VERTICAL )
 
 		self.panel_formlogin = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		self.panel_formlogin.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
+
 		bSizer57 = wx.BoxSizer( wx.VERTICAL )
 
 
@@ -37,12 +39,19 @@ class fitur_login ( wx.Frame ):
 		self.teks_formlogin = wx.StaticText( self.panel_formlogin, wx.ID_ANY, u"Form Login", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.teks_formlogin.Wrap( -1 )
 
-		self.teks_formlogin.SetFont( wx.Font( 25, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Montserrat Black" ) )
+		self.teks_formlogin.SetFont( wx.Font( 30, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, "Montserrat Black" ) )
 
 		bSizer57.Add( self.teks_formlogin, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
 
+		self.teks_penjelasan = wx.StaticText( self.panel_formlogin, wx.ID_ANY, u"Sistem Manajemen Gudang Barang", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_penjelasan.Wrap( -1 )
 
-		bSizer57.Add( ( 0, 10), 1, wx.EXPAND, 5 )
+		self.teks_penjelasan.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat SemiBold" ) )
+
+		bSizer57.Add( self.teks_penjelasan, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
+
+		self.m_bitmap1 = wx.StaticBitmap( self.panel_formlogin, wx.ID_ANY, wx.Bitmap( u"logo - Copy.png", wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.Size( 70,70 ), 0 )
+		bSizer57.Add( self.m_bitmap1, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 
 		self.teks_username = wx.StaticText( self.panel_formlogin, wx.ID_ANY, u"Username", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.teks_username.Wrap( -1 )
@@ -106,54 +115,6 @@ class fitur_login ( wx.Frame ):
 
 	def btn_loginOnButtonClick( self, event ):
 		event.Skip()
-
-
-###########################################################################
-## Class listfitur_admin
-###########################################################################
-
-class listfitur_admin ( wx.Panel ):
-
-	def __init__( self, parent, id = wx.ID_ANY, pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.TAB_TRAVERSAL, name = wx.EmptyString ):
-		wx.Panel.__init__ ( self, parent, id = id, pos = pos, size = size, style = style, name = name )
-
-		bSizer15 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer15.Add( ( 0, 10), 1, 0, 5 )
-
-		self.m_staticText7 = wx.StaticText( self, wx.ID_ANY, u"MyLabel", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText7.Wrap( -1 )
-
-		bSizer15.Add( self.m_staticText7, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
-
-
-		bSizer15.Add( ( 0, 10), 1, wx.EXPAND, 5 )
-
-		self.m_button46 = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.Size( 450,35 ), 0 )
-		bSizer15.Add( self.m_button46, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
-
-		self.m_button42 = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.Size( 450,-1 ), 0 )
-		bSizer15.Add( self.m_button42, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
-
-		self.m_button47 = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.Size( 450,-1 ), 0 )
-		bSizer15.Add( self.m_button47, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
-
-		self.m_button43 = wx.Button( self, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.Size( 450,-1 ), 0 )
-		bSizer15.Add( self.m_button43, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
-
-
-		bSizer15.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-
-		bSizer15.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-
-		self.SetSizer( bSizer15 )
-		self.Layout()
-
-	def __del__( self ):
-		pass
 
 
 ###########################################################################
@@ -299,7 +260,7 @@ class Fituradmin ( wx.Panel ):
 
 		self.btn_admin_exit = wx.Button( self.panel_fituradmin, wx.ID_ANY, u"EXIT", wx.DefaultPosition, wx.Size( 150,40 ), 0 )
 		self.btn_admin_exit.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
-		self.btn_admin_exit.SetForegroundColour( wx.Colour( 255, 255, 255 ) )
+		self.btn_admin_exit.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_INFOTEXT ) )
 		self.btn_admin_exit.SetBackgroundColour( wx.Colour( 246, 69, 70 ) )
 
 		bSizer56.Add( self.btn_admin_exit, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
@@ -344,219 +305,6 @@ class Fituradmin ( wx.Panel ):
 		event.Skip()
 
 	def btn_admin_exitOnButtonClick( self, event ):
-		event.Skip()
-
-
-###########################################################################
-## Class form_tambah_karyawan
-###########################################################################
-
-class form_tambah_karyawan ( wx.Panel ):
-
-	def __init__( self, parent, id = wx.ID_ANY, pos = wx.DefaultPosition, size = wx.Size( 700,500 ), style = wx.TAB_TRAVERSAL, name = wx.EmptyString ):
-		wx.Panel.__init__ ( self, parent, id = id, pos = pos, size = size, style = style, name = name )
-
-		self.SetBackgroundColour( wx.Colour( 238, 242, 245 ) )
-
-		bSizer12 = wx.BoxSizer( wx.VERTICAL )
-
-		self.panel_tambahpegawai = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-		bSizer55 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-
-		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-		self.m_panel18 = wx.Panel( self.panel_tambahpegawai, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-		bSizer29 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer29.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-		self.m_staticText22 = wx.StaticText( self.m_panel18, wx.ID_ANY, u"FORM TAMBAH PEGAWAI", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText22.Wrap( -1 )
-
-		self.m_staticText22.SetFont( wx.Font( 28, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat ExtraBold" ) )
-
-		bSizer29.Add( self.m_staticText22, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
-
-
-		bSizer29.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-
-		self.m_panel18.SetSizer( bSizer29 )
-		self.m_panel18.Layout()
-		bSizer29.Fit( self.m_panel18 )
-		bSizer55.Add( self.m_panel18, 1, wx.EXPAND |wx.ALL, 5 )
-
-
-		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-		self.m_panel6 = wx.Panel( self.panel_tambahpegawai, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-		self.m_panel6.SetFont( wx.Font( 9, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
-
-		fgSizer5 = wx.FlexGridSizer( 0, 3, 0, 0 )
-		fgSizer5.SetFlexibleDirection( wx.BOTH )
-		fgSizer5.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
-
-
-		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-
-		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-
-		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-		self.teks_pegawai = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Nama Karyawan", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.teks_pegawai.Wrap( -1 )
-
-		self.teks_pegawai.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
-
-		fgSizer5.Add( self.teks_pegawai, 0, wx.ALL, 5 )
-
-
-		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-		self.input_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
-		fgSizer5.Add( self.input_karyawan, 0, wx.ALL, 5 )
-
-		self.teks_umur_pegawai = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Umur", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.teks_umur_pegawai.Wrap( -1 )
-
-		self.teks_umur_pegawai.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
-
-		fgSizer5.Add( self.teks_umur_pegawai, 0, wx.ALL, 5 )
-
-
-		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-		self.input_umur_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
-		fgSizer5.Add( self.input_umur_karyawan, 0, wx.ALL, 5 )
-
-		self.teks_jeniskelamin_karyawan = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Jenis Kelamin", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.teks_jeniskelamin_karyawan.Wrap( -1 )
-
-		self.teks_jeniskelamin_karyawan.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
-
-		fgSizer5.Add( self.teks_jeniskelamin_karyawan, 0, wx.ALL, 5 )
-
-
-		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-		self.input_jeniskelamin_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
-		fgSizer5.Add( self.input_jeniskelamin_karyawan, 0, wx.ALL, 5 )
-
-		self.teks_username_karyawan = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Username", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.teks_username_karyawan.Wrap( -1 )
-
-		self.teks_username_karyawan.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
-
-		fgSizer5.Add( self.teks_username_karyawan, 0, wx.ALL, 5 )
-
-
-		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-		self.input_username_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
-		fgSizer5.Add( self.input_username_karyawan, 0, wx.ALL, 5 )
-
-		self.teks_password_karyawan = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Password", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.teks_password_karyawan.Wrap( -1 )
-
-		self.teks_password_karyawan.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
-
-		fgSizer5.Add( self.teks_password_karyawan, 0, wx.ALL, 5 )
-
-
-		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-		self.input_password_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), wx.TE_PASSWORD )
-		fgSizer5.Add( self.input_password_karyawan, 0, wx.ALL, 5 )
-
-		self.m_staticText53 = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Foto", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText53.Wrap( -1 )
-
-		self.m_staticText53.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
-
-		fgSizer5.Add( self.m_staticText53, 0, wx.ALL, 5 )
-
-
-		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-		self.m_filePicker2 = wx.FilePickerCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, u"Select a file", u"*.*", wx.DefaultPosition, wx.Size( 200,-1 ), wx.FLP_DEFAULT_STYLE|wx.FLP_SAVE )
-		fgSizer5.Add( self.m_filePicker2, 0, wx.ALL, 5 )
-
-
-		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
-
-
-		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
-
-
-		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
-
-
-		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
-
-		self.btn_simpan_tambah_karyawan = wx.Button( self.m_panel6, wx.ID_ANY, u"Simpan", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
-		self.btn_simpan_tambah_karyawan.SetFont( wx.Font( 9, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
-
-		fgSizer5.Add( self.btn_simpan_tambah_karyawan, 0, wx.ALL, 5 )
-
-		self.btn_batal_tambah = wx.Button( self.m_panel6, wx.ID_ANY, u"Batal", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
-		self.btn_batal_tambah.SetFont( wx.Font( 9, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
-
-		fgSizer5.Add( self.btn_batal_tambah, 0, wx.ALL, 5 )
-
-		bSizer18 = wx.BoxSizer( wx.HORIZONTAL )
-
-
-		fgSizer5.Add( bSizer18, 1, wx.ALIGN_CENTER|wx.EXPAND, 5 )
-
-
-		self.m_panel6.SetSizer( fgSizer5 )
-		self.m_panel6.Layout()
-		fgSizer5.Fit( self.m_panel6 )
-		bSizer55.Add( self.m_panel6, 1, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-
-		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-
-		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
-
-
-		self.panel_tambahpegawai.SetSizer( bSizer55 )
-		self.panel_tambahpegawai.Layout()
-		bSizer55.Fit( self.panel_tambahpegawai )
-		bSizer12.Add( self.panel_tambahpegawai, 1, wx.EXPAND |wx.ALL, 5 )
-
-
-		self.SetSizer( bSizer12 )
-		self.Layout()
-
-		# Connect Events
-		self.m_filePicker2.Bind( wx.EVT_FILEPICKER_CHANGED, self.m_filePicker2OnFileChanged )
-		self.btn_simpan_tambah_karyawan.Bind( wx.EVT_BUTTON, self.btn_simpan_tambah_karyawanOnButtonClick )
-		self.btn_batal_tambah.Bind( wx.EVT_BUTTON, self.btn_batal_tambahOnButtonClick )
-
-	def __del__( self ):
-		pass
-
-
-	# Virtual event handlers, overide them in your derived class
-	def m_filePicker2OnFileChanged( self, event ):
-		event.Skip()
-
-	def btn_simpan_tambah_karyawanOnButtonClick( self, event ):
-		event.Skip()
-
-	def btn_batal_tambahOnButtonClick( self, event ):
 		event.Skip()
 
 
@@ -1029,6 +777,436 @@ class tabel_data_barang ( wx.Panel ):
 
 
 ###########################################################################
+## Class form_tambah_karyawan
+###########################################################################
+
+class form_tambah_karyawan ( wx.Panel ):
+
+	def __init__( self, parent, id = wx.ID_ANY, pos = wx.DefaultPosition, size = wx.Size( 700,500 ), style = wx.TAB_TRAVERSAL, name = wx.EmptyString ):
+		wx.Panel.__init__ ( self, parent, id = id, pos = pos, size = size, style = style, name = name )
+
+		self.SetBackgroundColour( wx.Colour( 238, 242, 245 ) )
+
+		bSizer12 = wx.BoxSizer( wx.VERTICAL )
+
+		self.panel_tambahpegawai = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer55 = wx.BoxSizer( wx.VERTICAL )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.m_panel18 = wx.Panel( self.panel_tambahpegawai, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer29 = wx.BoxSizer( wx.VERTICAL )
+
+
+		bSizer29.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.m_staticText22 = wx.StaticText( self.m_panel18, wx.ID_ANY, u"FORM TAMBAH PEGAWAI", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText22.Wrap( -1 )
+
+		self.m_staticText22.SetFont( wx.Font( 28, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat ExtraBold" ) )
+
+		bSizer29.Add( self.m_staticText22, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+
+
+		bSizer29.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		self.m_panel18.SetSizer( bSizer29 )
+		self.m_panel18.Layout()
+		bSizer29.Fit( self.m_panel18 )
+		bSizer55.Add( self.m_panel18, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.m_panel6 = wx.Panel( self.panel_tambahpegawai, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		self.m_panel6.SetFont( wx.Font( 9, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5 = wx.FlexGridSizer( 0, 3, 0, 0 )
+		fgSizer5.SetFlexibleDirection( wx.BOTH )
+		fgSizer5.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.teks_pegawai = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Nama Karyawan", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_pegawai.Wrap( -1 )
+
+		self.teks_pegawai.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_pegawai, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_karyawan, 0, wx.ALL, 5 )
+
+		self.teks_umur_pegawai = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Umur", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_umur_pegawai.Wrap( -1 )
+
+		self.teks_umur_pegawai.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_umur_pegawai, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_umur_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_umur_karyawan, 0, wx.ALL, 5 )
+
+		self.teks_jeniskelamin_karyawan = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Jenis Kelamin", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_jeniskelamin_karyawan.Wrap( -1 )
+
+		self.teks_jeniskelamin_karyawan.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_jeniskelamin_karyawan, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_jeniskelamin_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_jeniskelamin_karyawan, 0, wx.ALL, 5 )
+
+		self.teks_username_karyawan = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Username", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_username_karyawan.Wrap( -1 )
+
+		self.teks_username_karyawan.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_username_karyawan, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_username_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_username_karyawan, 0, wx.ALL, 5 )
+
+		self.teks_password_karyawan = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Password", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_password_karyawan.Wrap( -1 )
+
+		self.teks_password_karyawan.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_password_karyawan, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_password_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), wx.TE_PASSWORD )
+		fgSizer5.Add( self.input_password_karyawan, 0, wx.ALL, 5 )
+
+		self.m_staticText53 = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Foto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText53.Wrap( -1 )
+
+		self.m_staticText53.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.m_staticText53, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.get_foto_karyawan = wx.FilePickerCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, u"Select a file", u"*.*", wx.DefaultPosition, wx.Size( 200,-1 ), wx.FLP_DEFAULT_STYLE|wx.FLP_SAVE )
+		fgSizer5.Add( self.get_foto_karyawan, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
+
+		self.btn_simpan_tambah_karyawan = wx.Button( self.m_panel6, wx.ID_ANY, u"Simpan", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
+		self.btn_simpan_tambah_karyawan.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
+		self.btn_simpan_tambah_karyawan.SetBackgroundColour( wx.Colour( 0, 206, 0 ) )
+
+		fgSizer5.Add( self.btn_simpan_tambah_karyawan, 0, wx.ALL, 5 )
+
+		self.btn_batal_tambah = wx.Button( self.m_panel6, wx.ID_ANY, u"Batal", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
+		self.btn_batal_tambah.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
+		self.btn_batal_tambah.SetBackgroundColour( wx.Colour( 246, 69, 70 ) )
+
+		fgSizer5.Add( self.btn_batal_tambah, 0, wx.ALL, 5 )
+
+		bSizer18 = wx.BoxSizer( wx.HORIZONTAL )
+
+
+		fgSizer5.Add( bSizer18, 1, wx.ALIGN_CENTER|wx.EXPAND, 5 )
+
+
+		self.m_panel6.SetSizer( fgSizer5 )
+		self.m_panel6.Layout()
+		fgSizer5.Fit( self.m_panel6 )
+		bSizer55.Add( self.m_panel6, 1, wx.ALIGN_CENTER|wx.ALL, 5 )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		self.panel_tambahpegawai.SetSizer( bSizer55 )
+		self.panel_tambahpegawai.Layout()
+		bSizer55.Fit( self.panel_tambahpegawai )
+		bSizer12.Add( self.panel_tambahpegawai, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		self.SetSizer( bSizer12 )
+		self.Layout()
+
+		# Connect Events
+		self.get_foto_karyawan.Bind( wx.EVT_FILEPICKER_CHANGED, self.get_foto_karyawanOnFileChanged )
+		self.btn_simpan_tambah_karyawan.Bind( wx.EVT_BUTTON, self.btn_simpan_tambah_karyawanOnButtonClick )
+		self.btn_batal_tambah.Bind( wx.EVT_BUTTON, self.btn_batal_tambahOnButtonClick )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def get_foto_karyawanOnFileChanged( self, event ):
+		event.Skip()
+
+	def btn_simpan_tambah_karyawanOnButtonClick( self, event ):
+		event.Skip()
+
+	def btn_batal_tambahOnButtonClick( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class form_edit_karyawan
+###########################################################################
+
+class form_edit_karyawan ( wx.Panel ):
+
+	def __init__( self, parent, id = wx.ID_ANY, pos = wx.DefaultPosition, size = wx.Size( 700,500 ), style = wx.TAB_TRAVERSAL, name = wx.EmptyString ):
+		wx.Panel.__init__ ( self, parent, id = id, pos = pos, size = size, style = style, name = name )
+
+		self.SetBackgroundColour( wx.Colour( 238, 242, 245 ) )
+
+		bSizer12 = wx.BoxSizer( wx.VERTICAL )
+
+		self.panel_tambahpegawai = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer55 = wx.BoxSizer( wx.VERTICAL )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.m_panel18 = wx.Panel( self.panel_tambahpegawai, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer29 = wx.BoxSizer( wx.VERTICAL )
+
+
+		bSizer29.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.teks_edit_pegawai = wx.StaticText( self.m_panel18, wx.ID_ANY, u"FORM EDIT PEGAWAI", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_edit_pegawai.Wrap( -1 )
+
+		self.teks_edit_pegawai.SetFont( wx.Font( 28, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat ExtraBold" ) )
+
+		bSizer29.Add( self.teks_edit_pegawai, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+
+
+		bSizer29.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		self.m_panel18.SetSizer( bSizer29 )
+		self.m_panel18.Layout()
+		bSizer29.Fit( self.m_panel18 )
+		bSizer55.Add( self.m_panel18, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.m_panel6 = wx.Panel( self.panel_tambahpegawai, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		self.m_panel6.SetFont( wx.Font( 9, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5 = wx.FlexGridSizer( 0, 3, 0, 0 )
+		fgSizer5.SetFlexibleDirection( wx.BOTH )
+		fgSizer5.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.teks_edit_nama_pegawai = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Nama Karyawan", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_edit_nama_pegawai.Wrap( -1 )
+
+		self.teks_edit_nama_pegawai.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_edit_nama_pegawai, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_edit_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_edit_karyawan, 0, wx.ALL, 5 )
+
+		self.teks_edit_umur_pegawai = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Umur", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_edit_umur_pegawai.Wrap( -1 )
+
+		self.teks_edit_umur_pegawai.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_edit_umur_pegawai, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_edit_umur_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_edit_umur_karyawan, 0, wx.ALL, 5 )
+
+		self.teks_jeniskelamin_karyawan = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Jenis Kelamin", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_jeniskelamin_karyawan.Wrap( -1 )
+
+		self.teks_jeniskelamin_karyawan.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_jeniskelamin_karyawan, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_edit_jeniskelamin_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_edit_jeniskelamin_karyawan, 0, wx.ALL, 5 )
+
+		self.teks_username_karyawan = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Username", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_username_karyawan.Wrap( -1 )
+
+		self.teks_username_karyawan.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_username_karyawan, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_edit_username_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_edit_username_karyawan, 0, wx.ALL, 5 )
+
+		self.teks_password_karyawan = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Password", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_password_karyawan.Wrap( -1 )
+
+		self.teks_password_karyawan.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_password_karyawan, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_edit_password_karyawan = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), wx.TE_PASSWORD )
+		fgSizer5.Add( self.input_edit_password_karyawan, 0, wx.ALL, 5 )
+
+		self.m_staticText53 = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Foto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText53.Wrap( -1 )
+
+		self.m_staticText53.SetFont( wx.Font( 14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.m_staticText53, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.get_edit_foto_karyawan = wx.FilePickerCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, u"Select a file", u"*.*", wx.DefaultPosition, wx.Size( 200,-1 ), wx.FLP_DEFAULT_STYLE|wx.FLP_SAVE )
+		fgSizer5.Add( self.get_edit_foto_karyawan, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
+
+		self.btn_edit_simpan_karyawan = wx.Button( self.m_panel6, wx.ID_ANY, u"Simpan", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
+		self.btn_edit_simpan_karyawan.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
+		self.btn_edit_simpan_karyawan.SetBackgroundColour( wx.Colour( 0, 206, 0 ) )
+
+		fgSizer5.Add( self.btn_edit_simpan_karyawan, 0, wx.ALL, 5 )
+
+		self.btn_edit_batal_karyawan = wx.Button( self.m_panel6, wx.ID_ANY, u"Batal", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
+		self.btn_edit_batal_karyawan.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
+		self.btn_edit_batal_karyawan.SetBackgroundColour( wx.Colour( 246, 69, 70 ) )
+
+		fgSizer5.Add( self.btn_edit_batal_karyawan, 0, wx.ALL, 5 )
+
+		bSizer18 = wx.BoxSizer( wx.HORIZONTAL )
+
+
+		fgSizer5.Add( bSizer18, 1, wx.ALIGN_CENTER|wx.EXPAND, 5 )
+
+
+		self.m_panel6.SetSizer( fgSizer5 )
+		self.m_panel6.Layout()
+		fgSizer5.Fit( self.m_panel6 )
+		bSizer55.Add( self.m_panel6, 1, wx.ALIGN_CENTER|wx.ALL, 5 )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		bSizer55.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		self.panel_tambahpegawai.SetSizer( bSizer55 )
+		self.panel_tambahpegawai.Layout()
+		bSizer55.Fit( self.panel_tambahpegawai )
+		bSizer12.Add( self.panel_tambahpegawai, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		self.SetSizer( bSizer12 )
+		self.Layout()
+
+		# Connect Events
+		self.get_edit_foto_karyawan.Bind( wx.EVT_FILEPICKER_CHANGED, self.get_foto_karyawanOnFileChanged )
+		self.btn_edit_simpan_karyawan.Bind( wx.EVT_BUTTON, self.btn_edit_simpan_karyawanOnButtonClick )
+		self.btn_edit_batal_karyawan.Bind( wx.EVT_BUTTON, self.btn_edit_batal_karyawanOnButtonClick )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def get_foto_karyawanOnFileChanged( self, event ):
+		event.Skip()
+
+	def btn_edit_simpan_karyawanOnButtonClick( self, event ):
+		event.Skip()
+
+	def btn_edit_batal_karyawanOnButtonClick( self, event ):
+		event.Skip()
+
+
+###########################################################################
 ## Class form_tambah_history
 ###########################################################################
 
@@ -1050,7 +1228,7 @@ class form_tambah_history ( wx.Panel ):
 		self.m_panel27 = wx.Panel( self.panel_tambahstory, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer48 = wx.BoxSizer( wx.VERTICAL )
 
-		self.teks_tambah_history = wx.StaticText( self.m_panel27, wx.ID_ANY, u"Form Tambah history", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_tambah_history = wx.StaticText( self.m_panel27, wx.ID_ANY, u"FORM TAMBAH HISTORY", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.teks_tambah_history.Wrap( -1 )
 
 		self.teks_tambah_history.SetFont( wx.Font( 28, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat ExtraBold" ) )
@@ -1157,9 +1335,15 @@ class form_tambah_history ( wx.Panel ):
 		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
 
 		self.btn_simpan_tambah_history = wx.Button( self.m_panel6, wx.ID_ANY, u"Simpan", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
+		self.btn_simpan_tambah_history.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
+		self.btn_simpan_tambah_history.SetBackgroundColour( wx.Colour( 0, 206, 0 ) )
+
 		fgSizer5.Add( self.btn_simpan_tambah_history, 0, wx.ALL, 5 )
 
 		self.btn_batal_tambah_history = wx.Button( self.m_panel6, wx.ID_ANY, u"Batal", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
+		self.btn_batal_tambah_history.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
+		self.btn_batal_tambah_history.SetBackgroundColour( wx.Colour( 246, 69, 70 ) )
+
 		fgSizer5.Add( self.btn_batal_tambah_history, 0, wx.ALL, 5 )
 
 		bSizer18 = wx.BoxSizer( wx.HORIZONTAL )
@@ -1219,7 +1403,7 @@ class form_tambah_barang ( wx.Panel ):
 
 		bSizer51.Add( ( 0, 0), 1, wx.EXPAND, 5 )
 
-		self.teks_tambah_barang = wx.StaticText( self.panel_tambahbarang, wx.ID_ANY, u"Form Tambah Barang", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_tambah_barang = wx.StaticText( self.panel_tambahbarang, wx.ID_ANY, u"FORM TAMBAH BARANG", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.teks_tambah_barang.Wrap( -1 )
 
 		self.teks_tambah_barang.SetFont( wx.Font( 28, wx.FONTFAMILY_DECORATIVE, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat Black" ) )
@@ -1323,8 +1507,8 @@ class form_tambah_barang ( wx.Panel ):
 
 		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
 
-		self.m_filePicker3 = wx.FilePickerCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, u"Select a file", u"*.*", wx.DefaultPosition, wx.Size( 200,-1 ), wx.FLP_DEFAULT_STYLE )
-		fgSizer5.Add( self.m_filePicker3, 0, wx.ALL, 5 )
+		self.get_foto_barang = wx.FilePickerCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, u"Select a file", u"*.*", wx.DefaultPosition, wx.Size( 200,-1 ), wx.FLP_DEFAULT_STYLE )
+		fgSizer5.Add( self.get_foto_barang, 0, wx.ALL, 5 )
 
 
 		fgSizer5.Add( ( 0, 15), 1, wx.EXPAND, 5 )
@@ -1339,9 +1523,15 @@ class form_tambah_barang ( wx.Panel ):
 		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
 
 		self.btn_simpan_tambah_barang = wx.Button( self.m_panel6, wx.ID_ANY, u"Simpan", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
+		self.btn_simpan_tambah_barang.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
+		self.btn_simpan_tambah_barang.SetBackgroundColour( wx.Colour( 0, 206, 0 ) )
+
 		fgSizer5.Add( self.btn_simpan_tambah_barang, 0, wx.ALL, 5 )
 
 		self.btn_batal_tambah_barang = wx.Button( self.m_panel6, wx.ID_ANY, u"Batal", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
+		self.btn_batal_tambah_barang.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
+		self.btn_batal_tambah_barang.SetBackgroundColour( wx.Colour( 246, 69, 70 ) )
+
 		fgSizer5.Add( self.btn_batal_tambah_barang, 0, wx.ALL, 5 )
 
 		bSizer18 = wx.BoxSizer( wx.HORIZONTAL )
@@ -1369,7 +1559,7 @@ class form_tambah_barang ( wx.Panel ):
 		self.Layout()
 
 		# Connect Events
-		self.m_filePicker3.Bind( wx.EVT_FILEPICKER_CHANGED, self.m_filePicker3OnFileChanged )
+		self.get_foto_barang.Bind( wx.EVT_FILEPICKER_CHANGED, self.get_foto_barangOnFileChanged )
 		self.btn_simpan_tambah_barang.Bind( wx.EVT_BUTTON, self.btn_simpan_tambah_barangOnButtonClick )
 		self.btn_batal_tambah_barang.Bind( wx.EVT_BUTTON, self.btn_batal_tambah_barangOnButtonClick )
 
@@ -1378,13 +1568,205 @@ class form_tambah_barang ( wx.Panel ):
 
 
 	# Virtual event handlers, overide them in your derived class
-	def m_filePicker3OnFileChanged( self, event ):
+	def get_foto_barangOnFileChanged( self, event ):
 		event.Skip()
 
 	def btn_simpan_tambah_barangOnButtonClick( self, event ):
 		event.Skip()
 
 	def btn_batal_tambah_barangOnButtonClick( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class form_edit_barang
+###########################################################################
+
+class form_edit_barang ( wx.Panel ):
+
+	def __init__( self, parent, id = wx.ID_ANY, pos = wx.DefaultPosition, size = wx.Size( 700,500 ), style = wx.TAB_TRAVERSAL, name = wx.EmptyString ):
+		wx.Panel.__init__ ( self, parent, id = id, pos = pos, size = size, style = style, name = name )
+
+		bSizer12 = wx.BoxSizer( wx.VERTICAL )
+
+		self.panel_editbarang = wx.Panel( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer51 = wx.BoxSizer( wx.VERTICAL )
+
+
+		bSizer51.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.teks_edit_barang = wx.StaticText( self.panel_editbarang, wx.ID_ANY, u"FORM EDIT BARANG", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_edit_barang.Wrap( -1 )
+
+		self.teks_edit_barang.SetFont( wx.Font( 28, wx.FONTFAMILY_DECORATIVE, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat Black" ) )
+
+		bSizer51.Add( self.teks_edit_barang, 0, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+
+		self.m_panel6 = wx.Panel( self.panel_editbarang, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		self.m_panel6.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5 = wx.FlexGridSizer( 0, 3, 0, 0 )
+		fgSizer5.SetFlexibleDirection( wx.BOTH )
+		fgSizer5.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+		self.teks_edit_pegawai = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Nama Barang", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_edit_pegawai.Wrap( -1 )
+
+		self.teks_edit_pegawai.SetFont( wx.Font( 15, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_edit_pegawai, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_edit_namabarang_barang = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_edit_namabarang_barang, 0, wx.ALL, 5 )
+
+		self.teks_edit_umur_pegawai = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Stock Barang", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_edit_umur_pegawai.Wrap( -1 )
+
+		self.teks_edit_umur_pegawai.SetFont( wx.Font( 15, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_edit_umur_pegawai, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_edit_stockbarang_barang = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_edit_stockbarang_barang, 0, wx.ALL, 5 )
+
+		self.teks_satuan_barang = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Satuan Barang", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_satuan_barang.Wrap( -1 )
+
+		self.teks_satuan_barang.SetFont( wx.Font( 15, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_satuan_barang, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_edit_satuanbarang_barang = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_edit_satuanbarang_barang, 0, wx.ALL, 5 )
+
+		self.teks_tahunkadaluarsa_barang = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Tahun Kadaluarsa", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_tahunkadaluarsa_barang.Wrap( -1 )
+
+		self.teks_tahunkadaluarsa_barang.SetFont( wx.Font( 15, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_tahunkadaluarsa_barang, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_edit_tahunkadaluarsa_barang = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_edit_tahunkadaluarsa_barang, 0, wx.ALL, 5 )
+
+		self.teks_edit_bulan_Kadaluarsa = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Bulan Kadaluarsa", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_edit_bulan_Kadaluarsa.Wrap( -1 )
+
+		self.teks_edit_bulan_Kadaluarsa.SetFont( wx.Font( 15, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_edit_bulan_Kadaluarsa, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_edit_bulankadaluarsa_barang = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		fgSizer5.Add( self.input_edit_bulankadaluarsa_barang, 0, wx.ALL, 5 )
+
+		self.teks_edit_tanggal_kadaluarsa = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Tanggal Kadaluarsa", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_edit_tanggal_kadaluarsa.Wrap( -1 )
+
+		self.teks_edit_tanggal_kadaluarsa.SetFont( wx.Font( 15, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_edit_tanggal_kadaluarsa, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.input_edit_tanggalkadaluarsa_barang = wx.TextCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
+		self.input_edit_tanggalkadaluarsa_barang.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.input_edit_tanggalkadaluarsa_barang, 0, wx.ALL, 5 )
+
+		self.teks_foto_barang = wx.StaticText( self.m_panel6, wx.ID_ANY, u"Foto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teks_foto_barang.Wrap( -1 )
+
+		self.teks_foto_barang.SetFont( wx.Font( 15, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, False, wx.EmptyString ) )
+
+		fgSizer5.Add( self.teks_foto_barang, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.get_edit_foto_barang = wx.FilePickerCtrl( self.m_panel6, wx.ID_ANY, wx.EmptyString, u"Select a file", u"*.*", wx.DefaultPosition, wx.Size( 200,-1 ), wx.FLP_DEFAULT_STYLE )
+		fgSizer5.Add( self.get_edit_foto_barang, 0, wx.ALL, 5 )
+
+
+		fgSizer5.Add( ( 0, 15), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		fgSizer5.Add( ( 0, 10), 1, wx.EXPAND, 5 )
+
+		self.btn_edit_simpan_barang = wx.Button( self.m_panel6, wx.ID_ANY, u"Simpan", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
+		self.btn_edit_simpan_barang.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
+		self.btn_edit_simpan_barang.SetBackgroundColour( wx.Colour( 0, 206, 0 ) )
+
+		fgSizer5.Add( self.btn_edit_simpan_barang, 0, wx.ALL, 5 )
+
+		self.btn_edit_batal_barang = wx.Button( self.m_panel6, wx.ID_ANY, u"Batal", wx.DefaultPosition, wx.Size( -1,35 ), 0 )
+		self.btn_edit_batal_barang.SetFont( wx.Font( 9, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Montserrat" ) )
+		self.btn_edit_batal_barang.SetBackgroundColour( wx.Colour( 246, 69, 70 ) )
+
+		fgSizer5.Add( self.btn_edit_batal_barang, 0, wx.ALL, 5 )
+
+		bSizer18 = wx.BoxSizer( wx.HORIZONTAL )
+
+
+		fgSizer5.Add( bSizer18, 1, wx.ALIGN_CENTER|wx.EXPAND, 5 )
+
+
+		self.m_panel6.SetSizer( fgSizer5 )
+		self.m_panel6.Layout()
+		fgSizer5.Fit( self.m_panel6 )
+		bSizer51.Add( self.m_panel6, 1, wx.ALIGN_CENTER|wx.ALL, 5 )
+
+
+		bSizer51.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		self.panel_editbarang.SetSizer( bSizer51 )
+		self.panel_editbarang.Layout()
+		bSizer51.Fit( self.panel_editbarang )
+		bSizer12.Add( self.panel_editbarang, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		self.SetSizer( bSizer12 )
+		self.Layout()
+
+		# Connect Events
+		self.get_edit_foto_barang.Bind( wx.EVT_FILEPICKER_CHANGED, self.get_edit_foto_barangOnFileChanged )
+		self.btn_edit_simpan_barang.Bind( wx.EVT_BUTTON, self.btn_edit_simpan_barangOnButtonClick )
+		self.btn_edit_batal_barang.Bind( wx.EVT_BUTTON, self.btn_edit_batal_barangOnButtonClick )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def get_edit_foto_barangOnFileChanged( self, event ):
+		event.Skip()
+
+	def btn_edit_simpan_barangOnButtonClick( self, event ):
+		event.Skip()
+
+	def btn_edit_batal_barangOnButtonClick( self, event ):
 		event.Skip()
 
 
