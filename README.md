@@ -1,6 +1,6 @@
 <p align="center">
 <a>
-<img src="./logo" width="128" height="128"></a>
+<img src=".https://raw.githubusercontent.com/Yusakha/PBO-II-Project/master/logo.png" width="128" height="128"></a>
 </p>
 <p align="center">
 <a href="#"><img title="SI Management Gudang Barang" src="https://img.shields.io/badge/SI%20Management%20Gudang%20Barang-blue?style=for-the-badge"></a>
