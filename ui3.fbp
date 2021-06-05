@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <<<<<<< HEAD:ui.fbp
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <wxFormBuilder_Project>
@@ -11848,8 +11847,6 @@
     </object>
 </wxFormBuilder_Project>
 =======
-=======
->>>>>>> 586cca468d63e81de52f1feace2ec703b626e239
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <wxFormBuilder_Project>
     <FileVersion major="1" minor="15" />
@@ -16050,11 +16047,7 @@
                 </object>
             </object>
         </object>
-<<<<<<< HEAD
         <object class="Panel" expanded="0">
-=======
-        <object class="Panel" expanded="1">
->>>>>>> 586cca468d63e81de52f1feace2ec703b626e239
             <property name="aui_managed">0</property>
             <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
             <property name="bg">238,242,245</property>
@@ -18977,21 +18970,7 @@
                                         </object>
                                         <object class="sizeritem" expanded="0">
                                             <property name="border">5</property>
-<<<<<<< HEAD
                                             <property name="flag">wxALIGN_RIGHT|wxALL</property>
-=======
-                                            <property name="flag">wxEXPAND</property>
-                                            <property name="proportion">1</property>
-                                            <object class="spacer" expanded="0">
-                                                <property name="height">10</property>
-                                                <property name="permission">protected</property>
-                                                <property name="width">0</property>
-                                            </object>
-                                        </object>
-                                        <object class="sizeritem" expanded="0">
-                                            <property name="border">5</property>
-                                            <property name="flag">wxALL</property>
->>>>>>> 586cca468d63e81de52f1feace2ec703b626e239
                                             <property name="proportion">0</property>
                                             <object class="wxButton" expanded="0">
                                                 <property name="BottomDockable">1</property>
@@ -19064,11 +19043,7 @@
                                         </object>
                                         <object class="sizeritem" expanded="0">
                                             <property name="border">5</property>
-<<<<<<< HEAD
                                             <property name="flag">wxALIGN_RIGHT|wxALL</property>
-=======
-                                            <property name="flag">wxALL</property>
->>>>>>> 586cca468d63e81de52f1feace2ec703b626e239
                                             <property name="proportion">0</property>
                                             <object class="wxButton" expanded="0">
                                                 <property name="BottomDockable">1</property>
@@ -19139,7 +19114,6 @@
                                                 <event name="OnButtonClick">btn_edit_batal_karyawanOnButtonClick</event>
                                             </object>
                                         </object>
-<<<<<<< HEAD
                                         <object class="sizeritem" expanded="0">
                                             <property name="border">5</property>
                                             <property name="flag">wxALIGN_LEFT|wxALL</property>
@@ -19213,8 +19187,6 @@
                                                 <event name="OnButtonClick">btn_hapus_karyawanOnButtonClick</event>
                                             </object>
                                         </object>
-=======
->>>>>>> 586cca468d63e81de52f1feace2ec703b626e239
                                     </object>
                                 </object>
                             </object>
@@ -21603,7 +21575,6 @@
                                             <property name="flag">wxEXPAND</property>
                                             <property name="proportion">1</property>
                                             <object class="spacer" expanded="0">
-<<<<<<< HEAD
                                                 <property name="height">0</property>
                                                 <property name="permission">protected</property>
                                                 <property name="width">0</property>
@@ -21625,20 +21596,13 @@
                                             <property name="proportion">1</property>
                                             <object class="spacer" expanded="0">
                                                 <property name="height">0</property>
-=======
-                                                <property name="height">10</property>
->>>>>>> 586cca468d63e81de52f1feace2ec703b626e239
                                                 <property name="permission">protected</property>
                                                 <property name="width">0</property>
                                             </object>
                                         </object>
                                         <object class="sizeritem" expanded="0">
                                             <property name="border">5</property>
-<<<<<<< HEAD
                                             <property name="flag">wxALIGN_RIGHT|wxALL</property>
-=======
-                                            <property name="flag">wxALL</property>
->>>>>>> 586cca468d63e81de52f1feace2ec703b626e239
                                             <property name="proportion">0</property>
                                             <object class="wxButton" expanded="0">
                                                 <property name="BottomDockable">1</property>
@@ -21782,7 +21746,6 @@
                                                 <event name="OnButtonClick">btn_edit_batal_barangOnButtonClick</event>
                                             </object>
                                         </object>
-<<<<<<< HEAD
                                         <object class="sizeritem" expanded="0">
                                             <property name="border">5</property>
                                             <property name="flag">wxALL</property>
@@ -21856,8 +21819,6 @@
                                                 <event name="OnButtonClick">btn_hapus_barangOnButtonClick</event>
                                             </object>
                                         </object>
-=======
->>>>>>> 586cca468d63e81de52f1feace2ec703b626e239
                                     </object>
                                 </object>
                             </object>
@@ -21898,7 +21859,4 @@
         </object>
     </object>
 </wxFormBuilder_Project>
-<<<<<<< HEAD
 >>>>>>> 586cca468d63e81de52f1feace2ec703b626e239:ui3.fbp
-=======
->>>>>>> 586cca468d63e81de52f1feace2ec703b626e239
