@@ -1,0 +1,682 @@
+import wx, ui
+from sql import connection
+from datetime import datetime
+
+class login(connection, ui.fitur_login):
+    def __init__(self, parent):
+        ui.fitur_login.__init__(self, parent)
+        super().__init__()
+
+    def btn_loginOnButtonClick( self, event ):
+        self.username = self.form_username.GetValue().lower()
+        self.password = self.form_password.GetValue()
+        tempNama = []
+        tempUsername = []
+        tempPassword = []
+        tempRole = []
+        tempUserID = []
+        tempJ = 0
+        query = ('SELECT ID_Person, Nama, username, password, role FROM person')
+        for x in self.fetch_all(query):
+            tempUserID.append(x[0])
+            tempNama.append(x[1])
+            tempUsername.append(x[2])
+            tempPassword.append(x[3])
+            tempRole.append(x[4])
+        for i in range(len(tempUsername)):
+            if self.username == tempUsername[i] and self.password == tempPassword[i]:
+                self.namaUser = tempNama[i]
+                self.UserID = tempUserID[i]
+                if tempRole[i] == "Owner":
+                    wx.MessageBox(f'Login Sukses!\nSelamat datang {tempNama[i]}.\nKlik OK untuk melanjutkan.', 'Login Sukses', wx.OK | wx.ICON_INFORMATION)
+                    mod = "Owner"
+                    self.panel_formlogin.Show(False)
+                    admin(self, mod, self.UserID).Show(True)
+                else:
+                    wx.MessageBox(f'Login Sukses!\nSelamat datang {tempNama[i]}.\nKlik OK untuk melanjutkan.', 'Login Sukses', wx.OK | wx.ICON_INFORMATION)
+                    mod = "Karyawan"
+                    self.panel_formlogin.Show(False)
+                    karyawan(self, mod, self.UserID).Show(True)
+            else:
+                tempJ += 1
+                if tempJ != len(tempUsername):
+                    pass
+                else :
+                    wx.MessageBox('Login Gagal. Silahkan coba lagi.', 'Login Gagal', wx.OK | wx.ICON_ERROR)
+
+class karyawan(connection, ui.Fiturkaryawan):
+    def __init__(self, parent, mod, user):
+        ui.Fiturkaryawan.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+    def btn_barang_karyawanOnButtonClick( self, event ):
+        self.panel_fiturkaryawan.Show(False)
+        dataBarang(self, self.mod, self.user).Show(True)
+    def btn_history_karyawanOnButtonClick( self, event ):
+        self.panel_fiturkaryawan.Show(False)
+        dataHistory(self, self.mod, self.user).Show(True)
+    def btn_karyawan_exitOnButtonClick( self, event ):
+        self.close()
+        wx.MessageBox('Berhasil Exit Aplikasi!', 'Exit', wx.OK | wx.ICON_INFORMATION)
+        exit()
+
+class admin(connection, ui.Fituradmin):
+    def __init__(self, parent, mod, user):
+        ui.Fituradmin.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+    def btn_admin_kepegawaianOnButtonClick( self, event ):
+        self.panel_fituradmin.Show(False)
+        dataKaryawan(self, self.mod, self.user).Show(True)
+    def btn_admin_barangOnButtonClick( self, event ):
+        self.panel_fituradmin.Show(False)
+        dataBarang(self, self.mod, self.user).Show(True)
+    def btn_admin_historyOnButtonClick( self, event ):
+        self.panel_fituradmin.Show(False)
+        dataHistory(self, self.mod, self.user).Show(True)
+    def btn_admin_exitOnButtonClick( self, event ):
+        self.close()
+        wx.MessageBox('Berhasil Exit Aplikasi!', 'Exit', wx.OK | wx.ICON_INFORMATION)
+        exit()
+
+class dataKaryawan(connection, ui.tabel_data_karyawan):
+    def __init__(self, parent, mod, user):
+        ui.tabel_data_karyawan.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+        self.select()
+    def select(self):
+        query = "SELECT ID_Person,Nama,Umur,Jenis_Kelamin,username,password FROM person WHERE Role='Karyawan'"
+        result = self.fetch_all(query)
+        for row in range(len(result)):
+            for col in range(6):
+                self.tabel_data_karyawan1.SetCellValue(row, col, f"{result[row][col]}")
+    def btn_back_tabel_karyawanOnButtonClick( self, event ):
+        self.panel_tabelkaryawan.Show(False)
+        if (self.mod == "Owner"):
+            admin(self, self.mod, self.user).Show(True)
+        else:
+            karyawan(self, self.mod, self.user).Show(True)
+    def btn_tambah_tabelkaryawanOnButtonClick( self, event ):
+        tambahKaryawan(self, self.mod, self.user).Show(True)
+        self.panel_tabelkaryawan.Show(False)
+    def btn_edit_karyawanOnButtonClick( self, event ):
+        idKaryawan(self, self.mod, self.user).Show(True)
+        self.panel_tabelkaryawan.Show(False)
+
+class idKaryawan(connection, ui.form_id_karyawan):
+    def __init__(self, parent, mod, user):
+        ui.form_id_karyawan.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+        self.select()
+    def select(self):
+        query = "SELECT ID_Person,Nama FROM person WHERE Role='Karyawan'"
+        result = self.fetch_all(query)
+        for row in range(len(result)):
+            for col in range(2):
+                self.tabel_edit_karyawan.SetCellValue(row, col, f"{result[row][col]}")
+    def check(self, karyawanID):
+        query = f"SELECT Nama FROM person WHERE Role='Karyawan' AND ID_Person ='{karyawanID}'"
+        result = self.fetch_all(query)
+        if len(result) == 1:
+            return True
+        else:
+            return False
+    def btn_OKOnButtonClick( self, event ):
+        self.id = self.input_id_karyawan.GetValue()
+        try:
+            int(self.input_id_karyawan.GetValue())
+            if self.check(self.id):
+                editKaryawan(self, self.mod, self.user, self.id).Show(True)
+                self.panel_tabelkaryawan.Show(False)
+            else:
+                wx.MessageBox('ID karyawan tidak tersedia!', 'ID Salah!', wx.OK | wx.ICON_ERROR)
+        except ValueError:
+            wx.MessageBox('Silahkan masukkan angka pada ID!', 'ID Salah!', wx.OK | wx.ICON_ERROR)
+    def btn_back_tabel_karyawanOnButtonClick( self, event ):
+        self.panel_tabelkaryawan.Show(False)
+        if (self.mod == "Owner"):
+            admin(self, self.mod, self.user).Show(True)
+        else:
+            karyawan(self, self.mod, self.user).Show(True)
+
+class tambahKaryawan(connection, ui.form_tambah_karyawan):
+    def __init__(self, parent, mod, user):
+        ui.form_tambah_karyawan.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+    def checkUsername(self,username):
+        query = f"SELECT username FROM person WHERE username = '{username}'"
+        result = self.fetch_all(query)
+        return result
+    def btn_simpan_tambah_karyawanOnButtonClick( self, event ):
+        self.nama = self.input_karyawan.GetValue()
+        self.umur = self.input_umur_karyawan.GetValue()
+        self.jenisKelamin = self.input_jeniskelamin_karyawan.GetValue().upper()
+        self.username = self.input_username_karyawan.GetValue().lower()
+        self.role = "Karyawan"
+        self.password = self.input_password_karyawan.GetValue()
+        try:
+            if len(self.nama) == 0:
+                wx.MessageBox('Silahkan masukkan nama.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+            else:
+                if len(self.umur) == 0:
+                    wx.MessageBox('Silahkan masukkan umur.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                else:
+                    try:
+                        int(self.umur)
+                        if len(self.jenisKelamin) == 0:
+                            wx.MessageBox('Silahkan masukkan Jenis Kelamin.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                        elif self.jenisKelamin == 'L' or self.jenisKelamin == 'P':
+                            if len(self.username) == 0:
+                                wx.MessageBox('Silahkan masukkan username.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                            else:
+                                if (len(self.checkUsername(self.username))==0):
+                                    if len(self.password) == 0:
+                                        wx.MessageBox('Silahkan masukkan password.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                    else:
+                                        self.created = datetime.now()
+                                        sql = "INSERT INTO person (Nama, Umur, Jenis_Kelamin, Role, username, password, created) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                                        val = (self.nama, self.umur, self.jenisKelamin, self.role, self.username, self.password, self.created)
+                                        self.commit(sql, val)
+                                        wx.MessageBox('Menambahkan karyawan telah Sukses!', 'Sukses menambahkan karyawan', wx.OK | wx.ICON_INFORMATION)
+                                        self.panel_tambahpegawai.Show(False)
+                                        dataKaryawan(self, self.mod, self.user).Show(True)
+                                else:
+                                    wx.MessageBox('Username telah digunakan.\nGunakan yang lain.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                        else:
+                            wx.MessageBox('Silahkan masukkan L/P pada Jenis Kelamin.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                    except ValueError:
+                        wx.MessageBox('Silahkan masukkan angka pada umur!', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+        except:
+            wx.MessageBox('Ada yang error saat memasukkan ke dalam database.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+    def btn_batal_tambahOnButtonClick( self, event ):
+        wx.MessageBox('Menambahkan karyawan telah dibatalkan', 'Batal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+        self.panel_tambahpegawai.Show(False)
+        dataKaryawan(self, self.mod, self.user).Show(True)
+
+class editKaryawan(connection, ui.form_edit_karyawan):
+    def __init__(self, parent, mod, user, idKaryawan):
+        ui.form_edit_karyawan.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+        self.id = idKaryawan
+        self.select(self.id)
+    def checkUsername(self,username):
+        query = f"SELECT username FROM person WHERE username = '{username}' EXCEPT SELECT username FROM person WHERE ID_Person = '{self.id}'"
+        result = self.fetch_all(query)
+        return result
+    def select(self, idKaryawan):
+        query = f"SELECT Nama,Umur,Jenis_Kelamin,username,password FROM person WHERE Role='Karyawan' AND ID_Person ='{idKaryawan}'"
+        result = self.fetch_all(query)
+        self.nama = result[0][0]
+        self.umur = result[0][1]
+        self.jenisKelamin = result[0][2]
+        self.username = result[0][3]
+        self.password = result[0][4]
+        self.input_edit_karyawan.SetValue(self.nama)
+        self.input_edit_umur_karyawan.SetValue(str(self.umur))
+        self.input_edit_jeniskelamin_karyawan.SetValue(self.jenisKelamin)
+        self.input_edit_username_karyawan.SetValue(self.username)
+        self.input_edit_password_karyawan.SetValue(self.password)
+    def btn_edit_simpan_karyawanOnButtonClick( self, event ):
+        self.nama = self.input_edit_karyawan.GetValue()
+        self.umur = self.input_edit_umur_karyawan.GetValue()
+        self.jenisKelamin = self.input_edit_jeniskelamin_karyawan.GetValue().upper()
+        self.username = self.input_edit_username_karyawan.GetValue().lower()
+        self.password = self.input_edit_password_karyawan.GetValue()
+        try:
+            if len(self.nama) == 0:
+                wx.MessageBox('Silahkan masukkan nama.', 'Gagal Edit Karyawan!', wx.OK | wx.ICON_ERROR)
+            else:
+                if len(self.umur) == 0:
+                    wx.MessageBox('Silahkan masukkan umur.', 'Gagal Edit Karyawan!', wx.OK | wx.ICON_ERROR)
+                else:
+                    try:
+                        int(self.umur)
+                        if len(self.jenisKelamin) == 0:
+                            wx.MessageBox('Silahkan masukkan Jenis Kelamin.', 'Gagal Edit Karyawan!', wx.OK | wx.ICON_ERROR)
+                        elif self.jenisKelamin == 'L' or self.jenisKelamin == 'P':
+                            if len(self.username) == 0:
+                                wx.MessageBox('Silahkan masukkan username.', 'Gagal Edit Karyawan!', wx.OK | wx.ICON_ERROR)
+                            else:
+                                if (len(self.checkUsername(self.username))==0):
+                                    if len(self.password) == 0:
+                                        wx.MessageBox('Silahkan masukkan password.', 'Gagal Edit Karyawan!', wx.OK | wx.ICON_ERROR)
+                                    else:
+                                        query = f"UPDATE person SET Nama = '{self.nama}', Umur = '{self.umur}', Jenis_Kelamin = '{self.jenisKelamin}', username = '{self.username}', password ='{self.password}' WHERE ID_Person = '{self.id}'"
+                                        self.fetch_one(query)
+                                        wx.MessageBox('Mengedit karyawan telah Sukses!', 'Gagal Edit Karyawan!', wx.OK | wx.ICON_INFORMATION)
+                                        self.panel_tambahpegawai.Show(False)
+                                        dataKaryawan(self, self.mod, self.user).Show(True)
+                                else:
+                                    wx.MessageBox('Username telah digunakan.\nGunakan yang lain.', 'Gagal Edit Karyawan!', wx.OK | wx.ICON_ERROR)
+                        else:
+                            wx.MessageBox('Silahkan masukkan L/P pada Jenis Kelamin.', 'Gagal Edit Karyawan!', wx.OK | wx.ICON_ERROR)
+                    except ValueError:
+                        wx.MessageBox('Silahkan masukkan angka pada umur!', 'Gagal Edit Karyawan!', wx.OK | wx.ICON_ERROR)
+        except:
+            wx.MessageBox('Ada yang error saat memasukkan ke dalam database.', 'Gagal Edit Karyawan!', wx.OK | wx.ICON_ERROR)
+    def btn_edit_batal_karyawanOnButtonClick( self, event ):
+        wx.MessageBox('Mengedit karyawan telah dibatalkan', 'Batal mengedit karyawan', wx.OK | wx.ICON_ERROR)
+        self.panel_tambahpegawai.Show(False)
+        dataKaryawan(self, self.mod, self.user).Show(True)
+    def btn_hapus_karyawanOnButtonClick( self, event ):
+        try:
+            query = f"DELETE FROM person WHERE ID_Person = {self.id}"
+            self.fetch_one(query)
+            wx.MessageBox('Berhasil mengkapus karyawan!', 'Berhasil menghapus karyawan', wx.OK | wx.ICON_INFORMATION)
+            self.panel_tambahpegawai.Show(False)
+            dataKaryawan(self, self.mod, self.user).Show(True)
+        except:
+            wx.MessageBox('Ada yang error saat menghapus karyawan dalam database.', 'Gagal hapus Karyawan!', wx.OK | wx.ICON_ERROR)
+
+class dataBarang(connection, ui.tabel_data_barang):
+    def __init__(self, parent, mod, user):
+        ui.tabel_data_barang.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+        self.select()
+    def select(self):
+        query = "SELECT * FROM barang"
+        result = self.fetch_all(query)
+        for row in range(len(result)):
+            for col in range(5):
+                self.tabelbarang.SetCellValue(row, col, f"{result[row][col]}")
+    def btn_tambah_barangOnButtonClick( self, event ):
+        tambahBarang(self, self.mod, self.user).Show(True)
+        self.panel_tabelbarang.Show(False)
+    def btn_edit_barangOnButtonClick( self, event ):
+        idBarang(self, self.mod, self.user).Show(True)
+        self.panel_tabelbarang.Show(False)
+    def btn_back_tabelbarangOnButtonClick( self, event ):
+        self.panel_tabelbarang.Show(False)
+        if (self.mod == "Owner"):
+            admin(self, self.mod, self.user).Show(True)
+        else:
+            karyawan(self, self.mod, self.user).Show(True)
+
+class tambahBarang(connection, ui.form_tambah_barang):
+    def __init__(self, parent, mod, user):
+        ui.form_tambah_barang.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+    def checkNama(self,nama):
+        query = f"SELECT Nama_Barang FROM barang WHERE Nama_Barang = '{nama}'"
+        result = self.fetch_all(query)
+        return result
+    def btn_simpan_tambah_barangOnButtonClick( self, event ):
+        self.nama = self.input_nama_barang.GetValue()
+        self.stok = self.input_stock_barang.GetValue()
+        self.satuan = self.input_satuan_barang.GetValue().lower()
+        self.tahun = self.input_tahunkadaluarsa_barang.GetValue()
+        self.bulan = self.input_bulankadaluarsa_barang.GetValue()
+        self.hari = self.input_tanggalkadaluarsa_barang.GetValue()
+        try:
+            if len(self.nama) == 0:
+                wx.MessageBox('Silahkan masukkan nama.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+            else:
+                if (len(self.checkNama(self.nama))==0): #
+                    if len(self.stok) == 0:
+                        wx.MessageBox('Silahkan masukkan stok.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                    else:
+                        try:
+                            int(self.stok)
+                            if len(self.satuan) == 0:
+                                wx.MessageBox('Silahkan masukkan satuan.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                            else:
+                                if len(self.tahun) == 0:
+                                    wx.MessageBox('Silahkan masukkan tahun kadaluarsa.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                else:
+                                    try:
+                                        int(self.tahun)
+                                        if len(str(self.tahun)) != 4 or int(self.tahun) > 9999:
+                                            wx.MessageBox('Silahkan masukkan tahun kadaluarsa dengan benar', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                        else:
+                                            if len(self.bulan) == 0:
+                                                wx.MessageBox('Silahkan masukkan bulan kadaluarsa.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                            else:
+                                                try:
+                                                    int(self.bulan)
+                                                    if int(self.bulan) > 12 or int(self.bulan) < 1:
+                                                        wx.MessageBox('Silahkan masukkan bulan kadaluarsa. dengan benar', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                                    else:
+                                                        if len(self.hari) == 0:
+                                                            wx.MessageBox('Silahkan masukkan hari kadaluarsa.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                                        elif int(self.hari) > 32 or int(self.hari) < 1:
+                                                            wx.MessageBox('Silahkan masukkan hari kadaluarsa dengan benar.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                                        else:
+                                                            try:
+                                                                int(self.hari)
+                                                                self.tanggal = f"{self.tahun}-{self.bulan}-{self.hari}"
+                                                                sql = "INSERT INTO barang (Nama_Barang , Jumlah_Barang , Satuan, Tanggal_Kadaluarsa) VALUES (%s, %s, %s, %s)"
+                                                                val = (self.nama, self.stok, self.satuan, self.tanggal)
+                                                                self.commit(sql, val)
+                                                                sql =  "SELECT ID_Barang FROM barang WHERE Nama_Barang = '{}'".format(self.nama)
+                                                                res = self.fetch_one(sql)
+                                                                for x in res :
+                                                                    self.barangID = x
+                                                                sql = "INSERT INTO history (PersonID, BarangID, Keterangan, Jumlah, Satuan, Tanggal) VALUES (%s, %s, %s, %s, %s, %s)"
+                                                                val = (self.user, self.barangID, "Input", self.stok, self.satuan, datetime.now())
+                                                                self.commit(sql, val)                                  
+                                                                wx.MessageBox('Sukses Menambahkan Barang', 'Sukses menambahkan karyawan!', wx.OK | wx.ICON_INFORMATION)
+                                                                self.panel_tambahbarang.Show(False)
+                                                                dataBarang(self, self.mod, self.user).Show(True)
+                                                            except ValueError:
+                                                                wx.MessageBox('Silahkan masukkan angka pada hari kadaluarsa!', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                                except ValueError:
+                                                    wx.MessageBox('Silahkan masukkan angka pada bulan kadaluarsa!', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                    except ValueError:
+                                        wx.MessageBox('Silahkan masukkan angka pada tahun kadaluarsa!', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                        except ValueError:
+                                wx.MessageBox('Silahkan masukkan angka pada stok!', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                else:
+                    wx.MessageBox('Nama sudah ada dalam fatabase.\nnGunakan nama yang lain.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+        except:
+            wx.MessageBox('Ada yang error saat memasukkan ke dalam database.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+    def btn_batal_tambah_barangOnButtonClick( self, event ):
+        wx.MessageBox('Menambahkan karyawan telah dibatalkan', 'Batal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+        self.panel_tambahbarang.Show(False)
+        dataBarang(self, self.mod, self.user).Show(True)
+
+class idBarang(connection, ui.form_id_barang):
+    def __init__(self, parent, mod, user):
+        ui.form_id_barang.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+        self.select()
+    def select(self):
+        query = "SELECT ID_Barang,Nama_Barang FROM barang"
+        result = self.fetch_all(query)
+        for row in range(len(result)):
+            for col in range(2):
+                self.tabel_edit_barang.SetCellValue(row, col, f"{result[row][col]}")
+    def check(self, barangID):
+        query = f"SELECT Nama_Barang FROM barang WHERE ID_Barang ='{barangID}'"
+        result = self.fetch_all(query)
+        if len(result) == 1:
+            return True
+        else:
+            return False
+    def btn_OKOnButtonClick( self, event ):
+        self.id = self.input_id_barang.GetValue()
+        try:
+            int(self.input_id_barang.GetValue())
+            if self.check(self.id):
+                editBarang(self, self.mod, self.user, self.id).Show(True)
+                self.panel_tabelbarang.Show(False)
+            else:
+                wx.MessageBox('ID barang tidak tersedia!', 'ID Salah!', wx.OK | wx.ICON_ERROR)
+        except ValueError:
+            wx.MessageBox('Silahkan masukkan angka pada ID!', 'ID Salah!', wx.OK | wx.ICON_ERROR)
+    def btn_back_tabelbarangOnButtonClick( self, event ):
+        self.panel_tabelbarang.Show(False)
+        dataBarang(self, self.mod, self.user).Show(True)
+
+class editBarang(connection, ui.form_edit_barang):
+    def __init__(self, parent, mod, user, idBarang):
+        ui.form_edit_barang.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+        self.id = idBarang
+        self.select(self.id)
+    def checkNamaBarang(self,nama):
+        query = f"SELECT Nama_Barang FROM barang WHERE Nama_Barang = '{nama}' EXCEPT SELECT Nama_Barang FROM barang WHERE ID_Barang = {self.id}"
+        result = self.fetch_all(query)
+        return result
+    def select(self, barangID):
+        query = f"SELECT Nama_Barang,Jumlah_Barang,Satuan,Tanggal_Kadaluarsa FROM barang WHERE ID_Barang ='{barangID}'"
+        result = self.fetch_all(query)
+        self.nama = result[0][0]
+        self.jumlah = result[0][1]
+        self.satuan = result[0][2]
+        self.tanggal = result[0][3]
+        self.tahun = result[0][3].strftime("%Y")
+        self.bulan = result[0][3].strftime("%m")
+        self.hari = result[0][3].strftime("%d")
+        self.input_edit_namabarang_barang.SetValue(self.nama)
+        self.input_edit_stockbarang_barang.SetValue(str(self.jumlah))
+        self.input_edit_satuanbarang_barang.SetValue(self.satuan)
+        self.input_edit_tahunkadaluarsa_barang.SetValue(self.tahun)
+        self.input_edit_bulankadaluarsa_barang.SetValue(self.bulan)
+        self.input_edit_tanggalkadaluarsa_barang.SetValue(self.hari)
+    def btn_edit_simpan_barangOnButtonClick( self, event ):
+        self.nama = self.input_edit_namabarang_barang.GetValue()
+        self.stok = self.input_edit_stockbarang_barang.GetValue()
+        self.satuan = self.input_edit_satuanbarang_barang.GetValue().lower()
+        self.tahun = self.input_edit_tahunkadaluarsa_barang.GetValue()
+        self.bulan = self.input_edit_bulankadaluarsa_barang.GetValue()
+        self.hari = self.input_edit_tanggalkadaluarsa_barang.GetValue()
+        try:
+            if len(self.nama) == 0:
+                wx.MessageBox('Silahkan masukkan nama.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+            else:
+                if (len(self.checkNamaBarang(self.nama))==0):
+                    if len(self.stok) == 0:
+                        wx.MessageBox('Silahkan masukkan stok.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                    else:
+                        try:
+                            int(self.stok)
+                            if len(self.satuan) == 0:
+                                wx.MessageBox('Silahkan masukkan satuan.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                            else:
+                                if len(self.tahun) == 0:
+                                    wx.MessageBox('Silahkan masukkan tahun kadaluarsa.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                else:
+                                    try:
+                                        int(self.tahun)
+                                        if len(str(self.tahun)) != 4 or int(self.tahun) > 9999 or int(self.tahun) < int(datetime.now().strftime("%Y")):
+                                            wx.MessageBox('Silahkan masukkan tahun kadaluarsa dengan benar', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                        else:
+                                            if len(self.bulan) == 0:
+                                                wx.MessageBox('Silahkan masukkan bulan kadaluarsa.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                            else:
+                                                try:
+                                                    int(self.bulan)
+                                                    if int(self.bulan) > 12 or int(self.bulan) < 1:
+                                                        print(self.bulan,int(self.bulan))
+                                                        wx.MessageBox('Silahkan masukkan bulan kadaluarsa. dengan benar', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                                    else:
+                                                        if len(self.hari) == 0:
+                                                            wx.MessageBox('Silahkan masukkan hari kadaluarsa.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                                        elif len(str(self.hari)) > 2 or len(str(self.hari)) < 0 or int(self.hari) > 32 or int(self.hari) < 1:
+                                                                print(self.bulan,int(self.bulan,str(self.bulan)))
+                                                                wx.MessageBox('Silahkan masukkan hari kadaluarsa dengan benar.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                                        else:
+                                                            try:
+                                                                int(self.hari)
+                                                                self.tanggal = f"{self.tahun}-{self.bulan}-{self.hari}"
+                                                                sql = "UPDATE barang SET Nama_Barang ='{}', Jumlah_Barang ='{}', Satuan='{}', Tanggal_Kadaluarsa='{}'".format(self.nama, self.stok, self.satuan, self.tanggal)
+                                                                self.fetch_one(sql)
+                                                                sql = "SELECT ID_Barang FROM barang WHERE Nama_Barang = '{}'".format(self.nama)
+                                                                res = self.fetch_all(sql)
+                                                                self.barangID = res[0][0]
+                                                                sql = "INSERT INTO history (PersonID, BarangID, Keterangan, Jumlah, Satuan, Tanggal) VALUES (%s, %s, %s, %s, %s, %s)"
+                                                                val = (self.user, self.barangID, "Adjust", self.stok, self.satuan, datetime.now())
+                                                                self.commit(sql, val)
+                                                                wx.MessageBox('Sukses Edit Barang', 'Sukses menambahkan karyawan!', wx.OK | wx.ICON_INFORMATION)
+                                                                self.panel_editbarang.Show(False)
+                                                                dataBarang(self, self.mod, self.user).Show(True)
+                                                            except ValueError:
+                                                                wx.MessageBox('Silahkan masukkan angka pada hari kadaluarsa!', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                                except ValueError:
+                                                    wx.MessageBox('Silahkan masukkan angka pada bulan kadaluarsa!', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                                    except ValueError:
+                                        wx.MessageBox('Silahkan masukkan angka pada tahun kadaluarsa!', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                        except ValueError:
+                                wx.MessageBox('Silahkan masukkan angka pada stok!', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                else:
+                    wx.MessageBox('Nama sudah ada dalam fatabase.\nnGunakan nama yang lain.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+        except:
+            wx.MessageBox('Ada yang error saat memasukkan ke dalam database.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+    def btn_edit_batal_barangOnButtonClick( self, event ):
+        wx.MessageBox('Mengedit karyawan telah dibatalkan', 'Batal mengedit karyawan', wx.OK | wx.ICON_ERROR)
+        self.panel_editbarang.Show(False)
+        dataBarang(self, self.mod, self.user).Show(True)
+    def btn_hapus_barangOnButtonClick( self, event ):
+        try:
+            query = f"DELETE FROM barang WHERE ID_Barang = {self.id}"
+            self.fetch_one(query)
+            wx.MessageBox('Berhasil menghapus Barang!', 'Berhasil menghapus karyawan', wx.OK | wx.ICON_INFORMATION)
+            self.panel_editbarang.Show(False)
+            dataBarang(self, self.mod, self.user).Show(True)
+        except:
+            wx.MessageBox('Ada yang error saat menghapus karyawan dalam database.', 'Gagal hapus Karyawan!', wx.OK | wx.ICON_ERROR)
+    def btn_input_barangOnButtonClick( self, event ):
+        self.panel_editbarang.Show(False)
+        inputBarang(self, self.mod, self.user, self.id).Show(True)
+    def btn_ambil_barangOnButtonClick( self, event ):
+        self.panel_editbarang.Show(False)
+        ambilBarang(self, self.mod, self.user, self.id).Show(True)
+
+class inputBarang(connection, ui.form_input_barang):
+    def __init__(self, parent, mod, user, barangID):
+        ui.form_input_barang.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+        self.id = barangID
+        self.awal = self.select(self.id)
+    def select(self, barangID):
+        query = f"SELECT Nama_Barang,Jumlah_Barang FROM barang WHERE ID_Barang ='{self.id}'"
+        result = self.fetch_all(query)
+        self.nama = result[0][0]
+        self.jumlah = result[0][1]
+        self.read_nama_barang.SetValue(self.nama)
+        self.read_stock_barang.SetValue(str(self.jumlah))
+        return self.jumlah
+    def btn_simpan_barangOnButtonClick( self, event ):
+        self.input = self.input_input_barang.GetValue()
+        try:
+            if len(self.input) == 0:
+                wx.MessageBox('Silahkan masukkan stock yang mau diinput.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+            else:
+                int(self.input)
+                if int(self.input) < 1:
+                    wx.MessageBox('Tidak boleh kurang dari 0', 'Batal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                else:
+                    self.total = int(self.awal) + int(self.input)
+                    sql = """
+                    UPDATE barang
+                    SET Jumlah_Barang = {}
+                    WHERE ID_Barang = {}
+                    """.format(self.total,self.id)
+                    self.fetch_one(sql)
+
+                    sql =  """SELECT Satuan FROM barang
+                    WHERE ID_Barang = {}""".format(self.id)
+                    res = self.fetch_one(sql)
+                    self.satuan = res[0][0]
+
+                    sql = """INSERT INTO history (PersonID,
+                    BarangID, Keterangan, Jumlah, Satuan, Tanggal)
+                    VALUES (%s, %s, %s, %s, %s, %s)"""
+                    val = (self.user, self.id, "Input", self.input, self.satuan, datetime.now())
+                    self.commit(sql, val)
+
+                    wx.MessageBox('Sukses', 'Batal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                    self.panel_input_barang.Show(False)
+                    dataBarang(self, self.mod, self.user).Show(True)
+        except ValueError:
+            wx.MessageBox('Masukkan angka pada Stock', 'Batal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+    def btn_batal_barangOnButtonClick( self, event ):
+        wx.MessageBox('Menambahkan input barang dibatalkan', 'Batal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+        self.panel_input_barang.Show(False)
+        dataBarang(self, self.mod, self.user).Show(True)
+
+class ambilBarang(connection, ui.form_ambil_barang):
+    def __init__(self, parent, mod, user, barangID):
+        ui.form_ambil_barang.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+        self.id = barangID
+        self.awal = self.select(self.id)
+    def select(self, barangID):
+        query = f"SELECT Nama_Barang,Jumlah_Barang FROM barang WHERE ID_Barang ='{self.id}'"
+        result = self.fetch_all(query)
+        self.nama = result[0][0]
+        self.jumlah = result[0][1]
+        self.read_nama_barang.SetValue(self.nama)
+        self.read_stock_barang.SetValue(str(self.jumlah))
+        return self.jumlah
+    def btn_simpan_barangOnButtonClick( self, event ):
+        self.ambil = self.input_ambil_barang.GetValue()
+        try:
+            if len(self.ambil) == 0:
+                wx.MessageBox('Silahkan masukkan stock yang mau diambil.', 'Gagal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+            else:
+                int(self.ambil)
+                if int(self.ambil) < 1:
+                    wx.MessageBox('Tidak boleh kurang dari 0', 'Batal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                else:
+                    if int(self.ambil) > int(self.awal):
+                        wx.MessageBox('Barang Melebihi Stok awal', 'Batal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                    else:
+                        self.total = int(self.awal) - int(self.ambil)
+                        sql = """
+                        UPDATE barang
+                        SET Jumlah_Barang = {}
+                        WHERE ID_Barang = {}
+                        """.format(self.total,self.id)
+                        self.fetch_one(sql)
+
+                        sql =  """SELECT Satuan FROM barang
+                        WHERE ID_Barang = {}""".format(self.id)
+                        res = self.fetch_one(sql)
+                        self.satuan = res[0][0]
+
+                        sql = """INSERT INTO history (PersonID,
+                        BarangID, Keterangan, Jumlah, Satuan, Tanggal)
+                        VALUES (%s, %s, %s, %s, %s, %s)"""
+                        val = (self.user, self.id, "Output", self.ambil, self.satuan, datetime.now())
+                        self.commit(sql, val)
+
+                        wx.MessageBox('Sukses', 'Batal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+                        self.panel_ambil_barang.Show(False)
+                        dataBarang(self, self.mod, self.user).Show(True)
+        except ValueError:
+            wx.MessageBox('Masukkan angka pada Stock', 'Batal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+    def btn_batal_barangOnButtonClick( self, event ):
+        wx.MessageBox('Menambahkan ambuk barang dibatalkan', 'Batal menambahkan karyawan!', wx.OK | wx.ICON_ERROR)
+        self.panel_ambil_barang.Show(False)
+        dataBarang(self, self.mod, self.user).Show(True)
+
+class dataHistory(connection, ui.tabel_data_history):
+    def __init__(self, parent, mod, user):
+        ui.tabel_data_history.__init__(self, parent)
+        super().__init__()
+        self.mod = mod
+        self.user = user
+        self.select()
+    def select(self):
+        query = "SELECT * FROM history"
+        result = self.fetch_all(query)
+        for row in range(len(result)):
+            for col in range(7):
+                self.tabelhistory.SetCellValue(row, col, f"{result[row][col]}")
+    def btn_back_historyOnButtonClick( self, event ):
+        self.panel_tabelhistory.Show(False)
+        if (self.mod == "Owner"):
+            admin(self, self.mod, self.user).Show(True)
+        else:
+            karyawan(self, self.mod, self.user).Show(True)
+
+if __name__ == '__main__':
+    mod = ""
+    app = wx.App()
+    frame = login(parent=None)
+    frame.SetIcon(wx.Icon("logo.png"))
+    frame.Show(True)
+    app.MainLoop()
