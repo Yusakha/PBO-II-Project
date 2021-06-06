@@ -34,3 +34,11 @@ aplikasi ini dibuat menggunakan python dan wxformbuilder
 |  Afandy Maulana Pangestu | 192410102056            |
 |  Achmad Nur Hidayat      | 192410102063            |
 |  Yoga Firdaus Pratikha   | 192410102084            |
+
+## Step instalasi
+
+```bash
+> pip install -r requirements.txt
+> python create.py
+> python controller.py
+```
