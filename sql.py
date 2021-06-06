@@ -1,23 +1,22 @@
 import mysql.connector
 from datetime import datetime
 
-
 class connection:
     def __init__(self):
         try:
             self.__con = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="",
-            database="management"
+            password=""
+            ,database="management"
             )
             self.__cursor = self.__con.cursor()
-            
+            # self.createDB()
+
         except mysql.connector.Error as e:
             print("Ada yang Error :\n{}".format(e))
 
     def close(self):
-        print("\nExit. . .")
         return self.__con.close()
 
     def fetch_all(self, query):
@@ -46,18 +45,23 @@ class connection:
 
     def createDB(self):
         # try:
-        #     self.__cursor.execute("DROP TABLE history")
-        #     print(self.__cursor)
-        #     self.__cursor.execute("DROP TABLE barang")
-        #     print(self.__cursor)
-        #     self.__cursor.execute("DROP TABLE person")
-        #     self.__con.commit()
+        #     self.__cursor.execute("DROP DATABASE Management")
         #     print(self.__cursor)
         # except:
         #     pass
 
+        # try:
+        #     self.__cursor.execute("CREATE DATABASE Management")
+        #     print(self.__cursor)
+        # except:
+        #     pass
         try:
-            self.__cursor.execute("CREATE DATABASE Management")
+            self.__cursor.execute("DROP TABLE history")
+            print(self.__cursor)
+            self.__cursor.execute("DROP TABLE barang")
+            print(self.__cursor)
+            self.__cursor.execute("DROP TABLE person")
+            self.__con.commit()
             print(self.__cursor)
         except:
             pass
@@ -127,9 +131,9 @@ class connection:
             
         try:
             self.__cursor.execute("""CREATE TABLE history (ID_History int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-            PersonID int NOT NULL, FOREIGN KEY (PersonID) REFERENCES person (ID_Person),
-            BarangID int NOT NULL, FOREIGN KEY (BarangID) REFERENCES barang (ID_Barang),
-            Keterangan ENUM('Input', 'Output') NOT NULL,
+            PersonID int NOT NULL, FOREIGN KEY (PersonID) REFERENCES person (ID_Person) ON DELETE CASCADE,
+            BarangID int NOT NULL, FOREIGN KEY (BarangID) REFERENCES barang (ID_Barang) ON DELETE CASCADE,
+            Keterangan ENUM('Input', 'Output', 'Adjust') NOT NULL,
             Jumlah int(255) NOT NULL,
             Satuan VARCHAR(255) NOT NULL,
             Tanggal datetime NOT NULL)""")
@@ -160,4 +164,5 @@ class connection:
             pass
   
 if __name__ == '__main__':
+    # connection()
     pass
