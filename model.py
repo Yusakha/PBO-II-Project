@@ -123,3 +123,7 @@ class model(connection):
         val = (user, ids, "Output", ambil, satuan, date)
         self.commit(sql, val)
         return
+
+    def select_history(self):
+        query = "SELECT * FROM history"
+        return self.fetch_all(query)
