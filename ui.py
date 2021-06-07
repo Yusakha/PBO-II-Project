@@ -18,9 +18,9 @@ import wx.grid
 class fitur_login ( wx.Frame ):
 
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Sistem Managemen Gudang Barang", pos = wx.DefaultPosition, size = wx.Size( 700,500 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Sistem Managemen Gudang Barang", pos = wx.DefaultPosition, size = wx.Size( 715,500 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+		self.SetSizeHints( wx.Size( 715,500 ), wx.Size( 715,500 ) )
 		self.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_MODERN, wx.FONTSTYLE_ITALIC, wx.FONTWEIGHT_NORMAL, False, "Montserrat Black" ) )
 		self.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_WINDOW ) )
 		self.SetBackgroundColour( wx.Colour( 238, 242, 245 ) )
@@ -330,7 +330,7 @@ class tabel_data_karyawan ( wx.Panel ):
 
 		bSizer26 = wx.BoxSizer( wx.HORIZONTAL )
 
-		self.btn_back_tabel_karyawan = wx.BitmapButton( self.m_panel11, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.Size( 30,35 ), wx.BU_AUTODRAW|0 )
+		self.btn_back_tabel_karyawan = wx.BitmapButton( self.m_panel11, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.Size( 35,35 ), wx.BU_AUTODRAW|0 )
 
 		self.btn_back_tabel_karyawan.SetBitmap( wx.ArtProvider.GetBitmap( wx.ART_QUIT, wx.ART_MENU ) )
 		self.btn_back_tabel_karyawan.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
@@ -388,12 +388,12 @@ class tabel_data_karyawan ( wx.Panel ):
 		self.tabel_data_karyawan1.SetMargins( 0, 0 )
 
 		# Columns
-		self.tabel_data_karyawan1.SetColSize( 0, 54 )
-		self.tabel_data_karyawan1.SetColSize( 1, 161 )
+		self.tabel_data_karyawan1.SetColSize( 0, 57 )
+		self.tabel_data_karyawan1.SetColSize( 1, 175 )
 		self.tabel_data_karyawan1.SetColSize( 2, 50 )
-		self.tabel_data_karyawan1.SetColSize( 3, 93 )
+		self.tabel_data_karyawan1.SetColSize( 3, 92 )
 		self.tabel_data_karyawan1.SetColSize( 4, 133 )
-		self.tabel_data_karyawan1.SetColSize( 5, 145 )
+		self.tabel_data_karyawan1.SetColSize( 5, 131 )
 		self.tabel_data_karyawan1.EnableDragColMove( True )
 		self.tabel_data_karyawan1.EnableDragColSize( True )
 		self.tabel_data_karyawan1.SetColLabelSize( 40 )
@@ -408,7 +408,7 @@ class tabel_data_karyawan ( wx.Panel ):
 
 		# Rows
 		self.tabel_data_karyawan1.EnableDragRowSize( False )
-		self.tabel_data_karyawan1.SetRowLabelSize( 20 )
+		self.tabel_data_karyawan1.SetRowLabelSize( 30 )
 		self.tabel_data_karyawan1.SetRowLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
 
 		# Label Appearance
@@ -480,12 +480,12 @@ class tabel_data_history ( wx.Panel ):
 		self.btn_back_history = wx.BitmapButton( self.m_panel11, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.Size( 35,35 ), wx.BU_AUTODRAW|0 )
 
 		self.btn_back_history.SetBitmap( wx.ArtProvider.GetBitmap( wx.ART_QUIT, wx.ART_BUTTON ) )
-		self.btn_back_history.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_WINDOW ) )
+		self.btn_back_history.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_MENU ) )
 
 		bSizer26.Add( self.btn_back_history, 0, wx.ALL, 5 )
 
 
-		bSizer26.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+		bSizer26.Add( ( 100, 0), 1, wx.EXPAND, 5 )
 
 		self.teks_data_history = wx.StaticText( self.m_panel11, wx.ID_ANY, u"Tabel Data History", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTER_HORIZONTAL )
 		self.teks_data_history.Wrap( -1 )
@@ -509,7 +509,7 @@ class tabel_data_history ( wx.Panel ):
 		self.m_panel12 = wx.Panel( self.panel_tabelhistory, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer28 = wx.BoxSizer( wx.VERTICAL )
 
-		self.tabelhistory = wx.grid.Grid( self.m_panel12, wx.ID_ANY, wx.DefaultPosition, wx.Size( 675,-1 ), 0 )
+		self.tabelhistory = wx.grid.Grid( self.m_panel12, wx.ID_ANY, wx.DefaultPosition, wx.Size( 700,500 ), 0 )
 
 		# Grid
 		self.tabelhistory.CreateGrid( 50, 7 )
@@ -523,12 +523,12 @@ class tabel_data_history ( wx.Panel ):
 		self.tabelhistory.SetColSize( 1, 85 )
 		self.tabelhistory.SetColSize( 2, 73 )
 		self.tabelhistory.SetColSize( 3, 86 )
-		self.tabelhistory.SetColSize( 4, 115 )
-		self.tabelhistory.SetColSize( 5, 80 )
-		self.tabelhistory.SetColSize( 6, 142 )
+		self.tabelhistory.SetColSize( 4, 100 )
+		self.tabelhistory.SetColSize( 5, 85 )
+		self.tabelhistory.SetColSize( 6, 167 )
 		self.tabelhistory.EnableDragColMove( False )
 		self.tabelhistory.EnableDragColSize( True )
-		self.tabelhistory.SetColLabelSize( 50 )
+		self.tabelhistory.SetColLabelSize( 40 )
 		self.tabelhistory.SetColLabelValue( 0, u"ID" )
 		self.tabelhistory.SetColLabelValue( 1, u"Id Karyawan" )
 		self.tabelhistory.SetColLabelValue( 2, u"Id Barang" )
@@ -652,7 +652,7 @@ class tabel_data_barang ( wx.Panel ):
 		self.m_panel12 = wx.Panel( self.panel_tabelbarang, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		bSizer28 = wx.BoxSizer( wx.VERTICAL )
 
-		self.tabelbarang = wx.grid.Grid( self.m_panel12, wx.ID_ANY, wx.DefaultPosition, wx.Size( 650,-1 ), 0 )
+		self.tabelbarang = wx.grid.Grid( self.m_panel12, wx.ID_ANY, wx.DefaultPosition, wx.Size( 700,500 ), 0 )
 
 		# Grid
 		self.tabelbarang.CreateGrid( 200, 5 )
@@ -663,20 +663,18 @@ class tabel_data_barang ( wx.Panel ):
 
 		# Columns
 		self.tabelbarang.SetColSize( 0, 57 )
-		self.tabelbarang.SetColSize( 1, 173 )
-		self.tabelbarang.SetColSize( 2, 103 )
-		self.tabelbarang.SetColSize( 3, 89 )
-		self.tabelbarang.SetColSize( 4, 190 )
+		self.tabelbarang.SetColSize( 1, 180 )
+		self.tabelbarang.SetColSize( 2, 100 )
+		self.tabelbarang.SetColSize( 3, 100 )
+		self.tabelbarang.SetColSize( 4, 201 )
 		self.tabelbarang.EnableDragColMove( False )
 		self.tabelbarang.EnableDragColSize( True )
-		self.tabelbarang.SetColLabelSize( 30 )
+		self.tabelbarang.SetColLabelSize( 40 )
 		self.tabelbarang.SetColLabelValue( 0, u"ID" )
 		self.tabelbarang.SetColLabelValue( 1, u"Nama Barang" )
 		self.tabelbarang.SetColLabelValue( 2, u"Jumlah Barang" )
 		self.tabelbarang.SetColLabelValue( 3, u"Satuan" )
-		self.tabelbarang.SetColLabelValue( 4, u"tanggal kadaluarsa" )
-		self.tabelbarang.SetColLabelValue( 5, u"Password" )
-		self.tabelbarang.SetColLabelValue( 6, u"Foto" )
+		self.tabelbarang.SetColLabelValue( 4, u"Tanggal Kadaluarsa" )
 		self.tabelbarang.SetColLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
 
 		# Rows

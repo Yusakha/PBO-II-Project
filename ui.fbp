@@ -41,11 +41,11 @@
             <property name="font">Montserrat Black,93,90,-1,75,0</property>
             <property name="hidden">0</property>
             <property name="id">wxID_ANY</property>
-            <property name="maximum_size"></property>
-            <property name="minimum_size"></property>
+            <property name="maximum_size">715,500</property>
+            <property name="minimum_size">715,500</property>
             <property name="name">fitur_login</property>
             <property name="pos"></property>
-            <property name="size">700,500</property>
+            <property name="size">715,500</property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
             <property name="subclass">; ; forward_declare</property>
             <property name="title">Sistem Managemen Gudang Barang</property>
@@ -1837,7 +1837,7 @@
                                                 <property name="pressed"></property>
                                                 <property name="resize">Resizable</property>
                                                 <property name="show">1</property>
-                                                <property name="size">30,35</property>
+                                                <property name="size">35,35</property>
                                                 <property name="style"></property>
                                                 <property name="subclass">; ; forward_declare</property>
                                                 <property name="toolbar_pane">0</property>
@@ -2193,7 +2193,7 @@
                                                 <property name="col_label_values">&quot;ID&quot; &quot;Nama Karyawan&quot; &quot;Umur&quot; &quot;Jenis Kelamin&quot; &quot;Username&quot; &quot;Password&quot; &quot;&quot;</property>
                                                 <property name="col_label_vert_alignment">wxALIGN_CENTER</property>
                                                 <property name="cols">6</property>
-                                                <property name="column_sizes">54,161,50,93,133,145</property>
+                                                <property name="column_sizes">57,175,50,92,133,131</property>
                                                 <property name="context_help"></property>
                                                 <property name="context_menu">1</property>
                                                 <property name="default_pane">0</property>
@@ -2235,7 +2235,7 @@
                                                 <property name="pos"></property>
                                                 <property name="resize">Resizable</property>
                                                 <property name="row_label_horiz_alignment">wxALIGN_CENTER</property>
-                                                <property name="row_label_size">20</property>
+                                                <property name="row_label_size">30</property>
                                                 <property name="row_label_values"></property>
                                                 <property name="row_label_vert_alignment">wxALIGN_CENTER</property>
                                                 <property name="row_sizes"></property>
@@ -2426,7 +2426,7 @@
                                                 <property name="aui_position"></property>
                                                 <property name="aui_row"></property>
                                                 <property name="best_size"></property>
-                                                <property name="bg">wxSYS_COLOUR_WINDOW</property>
+                                                <property name="bg">wxSYS_COLOUR_MENU</property>
                                                 <property name="bitmap">Load From Art Provider; wxART_QUIT; wxART_BUTTON</property>
                                                 <property name="caption"></property>
                                                 <property name="caption_visible">1</property>
@@ -2492,7 +2492,7 @@
                                             <object class="spacer" expanded="0">
                                                 <property name="height">0</property>
                                                 <property name="permission">protected</property>
-                                                <property name="width">0</property>
+                                                <property name="width">100</property>
                                             </object>
                                         </object>
                                         <object class="sizeritem" expanded="0">
@@ -2666,11 +2666,11 @@
                                                 <property name="center_pane">0</property>
                                                 <property name="close_button">1</property>
                                                 <property name="col_label_horiz_alignment">wxALIGN_CENTER</property>
-                                                <property name="col_label_size">50</property>
+                                                <property name="col_label_size">40</property>
                                                 <property name="col_label_values">&quot;ID&quot; &quot;Id Karyawan&quot; &quot;Id Barang&quot; &quot;Keterangan&quot; &quot;Jumlah&quot; &quot;Satuan&quot; &quot;Tanggal&quot;</property>
                                                 <property name="col_label_vert_alignment">wxALIGN_CENTER</property>
                                                 <property name="cols">7</property>
-                                                <property name="column_sizes">42,85,73,86,115,80,142</property>
+                                                <property name="column_sizes">42,85,73,86,100,85,167</property>
                                                 <property name="context_help"></property>
                                                 <property name="context_menu">1</property>
                                                 <property name="default_pane">0</property>
@@ -2718,7 +2718,7 @@
                                                 <property name="row_sizes"></property>
                                                 <property name="rows">50</property>
                                                 <property name="show">1</property>
-                                                <property name="size">675,-1</property>
+                                                <property name="size">700,500</property>
                                                 <property name="subclass">; ; forward_declare</property>
                                                 <property name="toolbar_pane">0</property>
                                                 <property name="tooltip"></property>
@@ -3299,11 +3299,11 @@
                                                 <property name="center_pane">0</property>
                                                 <property name="close_button">1</property>
                                                 <property name="col_label_horiz_alignment">wxALIGN_CENTER</property>
-                                                <property name="col_label_size">30</property>
-                                                <property name="col_label_values">&quot;ID&quot; &quot;Nama Barang&quot; &quot;Jumlah Barang&quot; &quot;Satuan&quot; &quot;tanggal kadaluarsa&quot; &quot;Password&quot; &quot;Foto&quot;</property>
+                                                <property name="col_label_size">40</property>
+                                                <property name="col_label_values">&quot;ID&quot; &quot;Nama Barang&quot; &quot;Jumlah Barang&quot; &quot;Satuan&quot; &quot;Tanggal Kadaluarsa&quot;</property>
                                                 <property name="col_label_vert_alignment">wxALIGN_CENTER</property>
                                                 <property name="cols">5</property>
-                                                <property name="column_sizes">57,173,103,89,190</property>
+                                                <property name="column_sizes">57,180,100,100,201</property>
                                                 <property name="context_help"></property>
                                                 <property name="context_menu">1</property>
                                                 <property name="default_pane">0</property>
@@ -3351,7 +3351,7 @@
                                                 <property name="row_sizes"></property>
                                                 <property name="rows">200</property>
                                                 <property name="show">1</property>
-                                                <property name="size">650,-1</property>
+                                                <property name="size">700,500</property>
                                                 <property name="subclass">; ; forward_declare</property>
                                                 <property name="toolbar_pane">0</property>
                                                 <property name="tooltip"></property>
