@@ -38,14 +38,14 @@ class login(model, ui.fitur_login):
                             messages(self, self.namaUser, self.title, 'S').login()
                             mod = "Owner"
                             self.close()
-                            self.panel_formlogin.Show(False)
-                            admin(self, mod, self.UserID).Show(True)
+                            self.panel_formlogin.Destroy()
+                            admin(self, mod, self.UserID).Show()
                         else:
                             messages(self, self.namaUser, self.title, 'S').login()
                             mod = "Karyawan"
                             self.close()
-                            self.panel_formlogin.Show(False)
-                            karyawan(self, mod, self.UserID).Show(True)
+                            self.panel_formlogin.Destroy()
+                            # karyawan(self, mod, self.UserID).Show()
                     else:
                         tempJ += 1
                         if tempJ != len(tempUsername):
@@ -60,11 +60,11 @@ class karyawan(ui.Fiturkaryawan):
         self.user = user
         self.title = 'Exit'
     def btn_barang_karyawanOnButtonClick( self, event ):
-        self.panel_fiturkaryawan.Show(False)
-        dataBarang(self, self.mod, self.user).Show(True)
+        self.panel_fiturkaryawan.Destroy()
+        dataBarang(self, self.mod, self.user).Show()
     def btn_history_karyawanOnButtonClick( self, event ):
-        self.panel_fiturkaryawan.Show(False)
-        dataHistory(self, self.mod, self.user).Show(True)
+        self.panel_fiturkaryawan.Destroy()
+        dataHistory(self, self.mod, self.user).Show()
     def btn_karyawan_exitOnButtonClick( self, event ):
         messages(self, '', self.title, 'S').exit()
         exit()
@@ -76,14 +76,14 @@ class admin(ui.Fituradmin):
         self.user = user
         self.title = 'Exit'
     def btn_admin_kepegawaianOnButtonClick( self, event ):
-        self.panel_fituradmin.Show(False)
-        dataKaryawan(self, self.mod, self.user).Show(True)
+        self.panel_fituradmin.Destroy()
+        dataKaryawan(self, self.mod, self.user).Show()
     def btn_admin_barangOnButtonClick( self, event ):
-        self.panel_fituradmin.Show(False)
-        dataBarang(self, self.mod, self.user).Show(True)
+        self.panel_fituradmin.Destroy()
+        dataBarang(self, self.mod, self.user).Show()
     def btn_admin_historyOnButtonClick( self, event ):
-        self.panel_fituradmin.Show(False)
-        dataHistory(self, self.mod, self.user).Show(True)
+        self.panel_fituradmin.Destroy()
+        dataHistory(self, self.mod, self.user).Show()
     def btn_admin_exitOnButtonClick( self, event ):
         messages(self, '', self.title, 'S').exit()
         exit()
@@ -102,19 +102,19 @@ class dataKaryawan(model, ui.tabel_data_karyawan):
                 self.tabel_data_karyawan1.SetCellValue(row, col, f"{result[row][col]}")
     def btn_back_tabel_karyawanOnButtonClick( self, event ):
         self.close()
-        self.panel_tabelkaryawan.Show(False)
+        self.panel_tabelkaryawan.Destroy()
         if (self.mod == "Owner"):
-            admin(self, self.mod, self.user).Show(True)
+            admin(self, self.mod, self.user).Show()
         else:
-            karyawan(self, self.mod, self.user).Show(True)
+            karyawan(self, self.mod, self.user).Show()
     def btn_tambah_tabelkaryawanOnButtonClick( self, event ):
         self.close()
-        tambahKaryawan(self, self.mod, self.user).Show(True)
-        self.panel_tabelkaryawan.Show(False)
+        tambahKaryawan(self, self.mod, self.user).Show()
+        self.panel_tabelkaryawan.Destroy()
     def btn_edit_karyawanOnButtonClick( self, event ):
         self.close()
-        idKaryawan(self, self.mod, self.user).Show(True)
-        self.panel_tabelkaryawan.Show(False)
+        idKaryawan(self, self.mod, self.user).Show()
+        self.panel_tabelkaryawan.Destroy()
 
 class idKaryawan(model, ui.form_id_karyawan):
     def __init__(self, parent, mod, user):
@@ -141,16 +141,16 @@ class idKaryawan(model, ui.form_id_karyawan):
             int(self.input_id_karyawan.GetValue())
             if self.check(self.id):
                 self.close()
-                editKaryawan(self, self.mod, self.user, self.id).Show(True)
-                self.panel_tabelkaryawan.Show(False)
+                editKaryawan(self, self.mod, self.user, self.id).Show()
+                self.panel_tabelkaryawan.Destroy()
             else:
                 messages(self, 'ID karyawan', self.title, 'E').unknown()
         except ValueError:
             messages(self, 'Stock', self.title, 'E').value()
     def btn_back_tabel_karyawanOnButtonClick( self, event ):
         self.close()
-        self.panel_tabelkaryawan.Show(False)
-        dataKaryawan(self, self.mod, self.user).Show(True)
+        self.panel_tabelkaryawan.Destroy()
+        dataKaryawan(self, self.mod, self.user).Show()
 
 class tambahKaryawan(model, ui.form_tambah_karyawan):
     def __init__(self, parent, mod, user):
@@ -192,8 +192,8 @@ class tambahKaryawan(model, ui.form_tambah_karyawan):
                                         model.tambahKaryawan(self, self.nama, self.umur, self.jenisKelamin, self.role, self.username, self.password, self.created)
                                         messages(self, 'menambahkan karyawan', self.title, 'S').sukses()
                                         self.close()
-                                        self.panel_tambahpegawai.Show(False)
-                                        dataKaryawan(self, self.mod, self.user).Show(True)
+                                        self.panel_tambahpegawai.Destroy()
+                                        dataKaryawan(self, self.mod, self.user).Show()
                                 else:
                                     messages(self, 'username', self.title, 'E').used()
                         else:
@@ -205,8 +205,8 @@ class tambahKaryawan(model, ui.form_tambah_karyawan):
     def btn_batal_tambahOnButtonClick( self, event ):
         messages(self, 'menambahkan karyawan', self.title, 'E').batal()
         self.close()
-        self.panel_tambahpegawai.Show(False)
-        dataKaryawan(self, self.mod, self.user).Show(True)
+        self.panel_tambahpegawai.Destroy()
+        dataKaryawan(self, self.mod, self.user).Show()
 
 class editKaryawan(model, ui.form_edit_karyawan):
     def __init__(self, parent, mod, user, idKaryawan):
@@ -257,11 +257,11 @@ class editKaryawan(model, ui.form_edit_karyawan):
                                     if len(self.password) == 0:
                                         messages(self, 'password', self.title, 'E').kosong()
                                     else:
-                                        model.editKaryawan(self, self.nama, self.umur, self.jenisKelamin, self.username, self.password, self.id, datetime.now())
+                                        model.editKaryawan(self, self.nama, self.umur, self.jenisKelamin, self.username, self.password, self.id)
                                         messages(self, 'mengedit karyawan', self.title, 'S').sukses()
                                         self.close()
-                                        self.panel_tambahpegawai.Show(False)
-                                        dataKaryawan(self, self.mod, self.user).Show(True)
+                                        self.panel_tambahpegawai.Destroy()
+                                        dataKaryawan(self, self.mod, self.user).Show()
                                 else:
                                     messages(self, 'username', self.title, 'E').used()
                         else:
@@ -273,15 +273,15 @@ class editKaryawan(model, ui.form_edit_karyawan):
     def btn_edit_batal_karyawanOnButtonClick( self, event ):
         messages(self, 'mengedit karyawan', self.title, 'E').batal()
         self.close()
-        self.panel_tambahpegawai.Show(False)
-        dataKaryawan(self, self.mod, self.user).Show(True)
+        self.panel_tambahpegawai.Destroy()
+        dataKaryawan(self, self.mod, self.user).Show()
     def btn_hapus_karyawanOnButtonClick( self, event ):
         try:
             model.hapus_editKaryawan(self, self.id)
             self.close()
             messages(self, 'karyawan', self.title, 'S').hapus()
-            self.panel_tambahpegawai.Show(False)
-            dataKaryawan(self, self.mod, self.user).Show(True)
+            self.panel_tambahpegawai.Destroy()
+            dataKaryawan(self, self.mod, self.user).Show()
         except:
             messages(self, 'menghapus', self.title, 'E').invalid()
 
@@ -299,19 +299,19 @@ class dataBarang(model, ui.tabel_data_barang):
                 self.tabelbarang.SetCellValue(row, col, f"{result[row][col]}")
     def btn_tambah_barangOnButtonClick( self, event ):
         self.close()
-        tambahBarang(self, self.mod, self.user).Show(True)
-        self.panel_tabelbarang.Show(False)
+        tambahBarang(self, self.mod, self.user).Show()
+        self.panel_tabelbarang.Destroy()
     def btn_edit_barangOnButtonClick( self, event ):
         self.close()
-        idBarang(self, self.mod, self.user).Show(True)
-        self.panel_tabelbarang.Show(False)
+        idBarang(self, self.mod, self.user).Show()
+        self.panel_tabelbarang.Destroy()
     def btn_back_tabelbarangOnButtonClick( self, event ):
         self.close()
-        self.panel_tabelbarang.Show(False)
+        self.panel_tabelbarang.Destroy()
         if (self.mod == "Owner"):
-            admin(self, self.mod, self.user).Show(True)
+            admin(self, self.mod, self.user).Show()
         else:
-            karyawan(self, self.mod, self.user).Show(True)
+            karyawan(self, self.mod, self.user).Show()
 
 class tambahBarang(model, ui.form_tambah_barang):
     def __init__(self, parent, mod, user):
@@ -369,8 +369,8 @@ class tambahBarang(model, ui.form_tambah_barang):
                                                                 self.tanggal = f"{self.tahun}-{self.bulan}-{self.hari}"
                                                                 model.tambahBarang(self, self.nama, self.stok, self.satuan, self.tanggal, self.user, datetime.now()) 
                                                                 messages(self, 'menambahkan barang', self.title, 'S').sukses()
-                                                                self.panel_tambahbarang.Show(False)
-                                                                dataBarang(self, self.mod, self.user).Show(True)
+                                                                self.panel_tambahbarang.Destroy()
+                                                                dataBarang(self, self.mod, self.user).Show()
                                                             except ValueError:
                                                                 messages(self, 'hari kadaluarsa', self.title, 'E').value()
                                                 except ValueError:
@@ -386,8 +386,8 @@ class tambahBarang(model, ui.form_tambah_barang):
     def btn_batal_tambah_barangOnButtonClick( self, event ):
         messages(self, 'menambahkan barang', self.title, 'E').batal()
         self.close()
-        self.panel_tambahbarang.Show(False)
-        dataBarang(self, self.mod, self.user).Show(True)
+        self.panel_tambahbarang.Destroy()
+        dataBarang(self, self.mod, self.user).Show()
 
 class idBarang(model, ui.form_id_barang):
     def __init__(self, parent, mod, user):
@@ -414,16 +414,16 @@ class idBarang(model, ui.form_id_barang):
             int(self.input_id_barang.GetValue())
             if self.check(self.id):
                 self.close()
-                editBarang(self, self.mod, self.user, self.id).Show(True)
-                self.panel_tabelbarang.Show(False)
+                editBarang(self, self.mod, self.user, self.id).Show()
+                self.panel_tabelbarang.Destroy()
             else:
                 messages(self, self.title, self.title, 'E').unknown()
         except ValueError:
             messages(self, self.title, self.title, 'E').value()
     def btn_back_tabelbarangOnButtonClick( self, event ):
         self.close()
-        self.panel_tabelbarang.Show(False)
-        dataBarang(self, self.mod, self.user).Show(True)
+        self.panel_tabelbarang.Destroy()
+        dataBarang(self, self.mod, self.user).Show()
 
 class editBarang(model, ui.form_edit_barang):
     def __init__(self, parent, mod, user, idBarang):
@@ -496,11 +496,11 @@ class editBarang(model, ui.form_edit_barang):
                                                             try:
                                                                 int(self.hari)
                                                                 self.tanggal = f"{self.tahun}-{self.bulan}-{self.hari}"
-                                                                model.editBarang(self, self.nama, self.stok, self.satuan, self.tanggal, self.id, self.user)
+                                                                model.editBarang(self, self.nama, self.stok, self.satuan, self.tanggal, self.id, self.user, datetime.now())
                                                                 messages(self, 'edit barang', self.title, 'S').sukses()
                                                                 self.close()
-                                                                self.panel_editbarang.Show(False)
-                                                                dataBarang(self, self.mod, self.user).Show(True)
+                                                                self.panel_editbarang.Destroy()
+                                                                dataBarang(self, self.mod, self.user).Show()
                                                             except ValueError:
                                                                 messages(self, 'tanggal', self.title, 'E').value()
                                                 except ValueError:
@@ -516,25 +516,25 @@ class editBarang(model, ui.form_edit_barang):
     def btn_edit_batal_barangOnButtonClick( self, event ):
         messages(self, 'mengedit karyawan', self.title, 'E').batal()
         self.close()
-        self.panel_editbarang.Show(False)
-        dataBarang(self, self.mod, self.user).Show(True)
+        self.panel_editbarang.Destroy()
+        dataBarang(self, self.mod, self.user).Show()
     def btn_hapus_barangOnButtonClick( self, event ):
         try:
             model.hapus_editBarang(self, self.id)
             messages(self, 'barang', self.title, 'S').hapus()
             self.close()
-            self.panel_editbarang.Show(False)
-            dataBarang(self, self.mod, self.user).Show(True)
+            self.panel_editbarang.Destroy()
+            dataBarang(self, self.mod, self.user).Show()
         except:
             messages(self, 'menghapus', self.title, 'E').invalid()
     def btn_input_barangOnButtonClick( self, event ):
         self.close()
-        self.panel_editbarang.Show(False)
-        inputBarang(self, self.mod, self.user, self.id).Show(True)
+        self.panel_editbarang.Destroy()
+        inputBarang(self, self.mod, self.user, self.id).Show()
     def btn_ambil_barangOnButtonClick( self, event ):
         self.close()
-        self.panel_editbarang.Show(False)
-        ambilBarang(self, self.mod, self.user, self.id).Show(True)
+        self.panel_editbarang.Destroy()
+        ambilBarang(self, self.mod, self.user, self.id).Show()
 
 class inputBarang(model, ui.form_input_barang):
     def __init__(self, parent, mod, user, barangID):
@@ -566,15 +566,15 @@ class inputBarang(model, ui.form_input_barang):
                     model.inputBarang(self, self.total, self.id, self.user, self.input, datetime.now())
                     messages(self, 'input barang', self.title, 'S').sukses()
                     self.close()
-                    self.panel_input_barang.Show(False)
-                    dataBarang(self, self.mod, self.user).Show(True)
+                    self.panel_input_barang.Destroy()
+                    dataBarang(self, self.mod, self.user).Show()
         except ValueError:
             messages(self, 'stock', self.title, 'E').value()
     def btn_batal_barangOnButtonClick( self, event ):
         messages(self, 'menambahkan stock barang', self.title, 'E').batal()
         self.close()
-        self.panel_input_barang.Show(False)
-        dataBarang(self, self.mod, self.user).Show(True)
+        self.panel_input_barang.Destroy()
+        dataBarang(self, self.mod, self.user).Show()
 
 class ambilBarang(model, ui.form_ambil_barang):
     def __init__(self, parent, mod, user, barangID):
@@ -609,15 +609,15 @@ class ambilBarang(model, ui.form_ambil_barang):
                         model.ambil_ambilBarang(self, self.total, self.id, self.user, self.ambil, datetime.now())
                         messages(self, 'mengambil barang', self.title, 'S').sukses()
                         self.close()
-                        self.panel_ambil_barang.Show(False)
-                        dataBarang(self, self.mod, self.user).Show(True)
+                        self.panel_ambil_barang.Destroy()
+                        dataBarang(self, self.mod, self.user).Show()
         except ValueError:
             messages(self, 'stock', self.title, 'E').value()
     def btn_batal_barangOnButtonClick( self, event ):
         messages(self, 'ambil barang', self.title, 'E').batal()
         self.close()
-        self.panel_ambil_barang.Show(False)
-        dataBarang(self, self.mod, self.user).Show(True)
+        self.panel_ambil_barang.Destroy()
+        dataBarang(self, self.mod, self.user).Show()
 
 class dataHistory(model, ui.tabel_data_history):
     def __init__(self, parent, mod, user):
@@ -627,23 +627,21 @@ class dataHistory(model, ui.tabel_data_history):
         self.user = user
         self.select()
     def select(self):
-        query = "SELECT * FROM history"
-        result = self.fetch_all(query)
+        result = model.select_history(self)
         for row in range(len(result)):
             for col in range(7):
                 self.tabelhistory.SetCellValue(row, col, f"{result[row][col]}")
         self.close()
     def btn_back_historyOnButtonClick( self, event ):
-        self.panel_tabelhistory.Show(False)
+        self.panel_tabelhistory.Destroy()
         if (self.mod == "Owner"):
-            admin(self, self.mod, self.user).Show(True)
+            admin(self, self.mod, self.user).Show()
         else:
-            karyawan(self, self.mod, self.user).Show(True)
+            karyawan(self, self.mod, self.user).Show()
 
 if __name__ == '__main__':
-    mod = ""
     app = wx.App()
     frame = login(parent=None)
     frame.SetIcon(wx.Icon("logo.png"))
-    frame.Show(True)
+    frame.Show()
     app.MainLoop()
