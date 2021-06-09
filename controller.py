@@ -45,7 +45,7 @@ class login(model, ui.fitur_login):
                             mod = "Karyawan"
                             self.close()
                             self.panel_formlogin.Destroy()
-                            # karyawan(self, mod, self.UserID).Show()
+                            karyawan(self, mod, self.UserID).Show()
                     else:
                         tempJ += 1
                         if tempJ != len(tempUsername):
@@ -641,6 +641,7 @@ class dataHistory(model, ui.tabel_data_history):
 
 if __name__ == '__main__':
     app = wx.App()
+    app.locale = wx.Locale(wx.LANGUAGE_ENGLISH)
     frame = login(parent=None)
     frame.SetIcon(wx.Icon("logo.png"))
     frame.Show()
